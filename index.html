@@ -1,0 +1,687 @@
+<!DOCTYPE html>
+<html lang="zh-TW">
+<head>
+    <meta charset="UTF-8" />
+    <meta name="viewport" content="width=device-width, initial-scale=1.0" />
+    <title>Chuone Toolbox</title>
+    <link rel="icon" type="image/png" href="read.png" />
+    
+    <link rel="preconnect" href="https://fonts.googleapis.com" />
+    <link rel="preconnect" href="https://fonts.gstatic.com" crossorigin />
+    <link href="https://fonts.googleapis.com/css2?family=Lora:ital,wght@0,400;0,500;0,600;0,700;1,400&family=Plus+Jakarta+Sans:wght@400;500;600;700&family=Noto+Sans+TC:wght@300;400;500;700&display=swap" rel="stylesheet" />
+    
+    <link rel="stylesheet" href="https://cdnjs.cloudflare.com/ajax/libs/font-awesome/6.5.1/css/all.min.css" />
+    
+    <script src="https://cdn.tailwindcss.com?plugins=forms"></script>
+    <script>
+        tailwind.config = {
+            theme: {
+                extend: {
+                    fontFamily: {
+                        sans: ['Plus Jakarta Sans', 'Noto Sans TC', 'sans-serif'],
+                        serif: ['Lora', 'serif'],
+                    },
+                    colors: {
+                        'sage-light': '#F2F5F2',
+                        'sage-main': '#8DA38E', /* 更新為圖片中的顏色 */
+                        'sage-dark': '#6B806C',
+                        'forest-dark': '#2F3E30',
+                        'cream': '#F9F8F4',
+                        'warm-gray': '#F0F0EE',
+                    },
+                    boxShadow: {
+                        'soft': '0 4px 20px -2px rgba(47, 62, 48, 0.1)',
+                        'soft-hover': '0 10px 25px -5px rgba(47, 62, 48, 0.15)',
+                    }
+                },
+            },
+        };
+    </script>
+    <style>
+        body {
+            background-color: #F9F8F4;
+            color: #2F3E30;
+            overflow-x: hidden;
+            font-family: 'Plus Jakarta Sans', 'Noto Sans TC', sans-serif;
+        }
+
+        h1, h2, h3, h4, .nav-logo-text {
+            font-family: 'Lora', serif;
+        }
+
+        /* 自定義捲軸 */
+        ::-webkit-scrollbar { width: 8px; }
+        ::-webkit-scrollbar-track { background: #F9F8F4; }
+        ::-webkit-scrollbar-thumb { background: #8DA38E; border-radius: 4px; }
+        ::-webkit-scrollbar-thumb:hover { background: #6B806C; }
+
+        /* 導覽列特效 - 文字加粗與懸停變白 */
+        .nav-link {
+            position: relative;
+            font-weight: 600; /* 加粗 */
+            color: #2F3E30;
+            letter-spacing: 0.05em;
+            cursor: pointer;
+            transition: all 0.3s ease;
+        }
+        .nav-link:hover {
+            color: #ffffff; /* 懸停變白 */
+            text-shadow: 0 2px 4px rgba(0,0,0,0.1);
+        }
+        .nav-link::after {
+            content: '';
+            position: absolute;
+            width: 0;
+            height: 2px; /* 線條稍微加粗 */
+            bottom: -4px;
+            left: 50%;
+            background-color: #ffffff;
+            transition: all 0.3s ease;
+            transform: translateX(-50%);
+        }
+        .nav-link:hover::after {
+            width: 100%;
+        }
+
+        /* 卡片樣式 */
+        .resource-card {
+            background: white;
+            border: 1px solid rgba(141, 163, 142, 0.3);
+            border-radius: 8px;
+            transition: all 0.4s ease;
+            height: 100%;
+            box-shadow: 0 2px 10px rgba(0,0,0,0.03);
+        }
+        .resource-card:hover {
+            transform: translateY(-5px);
+            box-shadow: 0 10px 30px rgba(47, 62, 48, 0.1);
+            border-color: #8DA38E;
+        }
+
+        /* 卡片連結 - 懸停使用新主色 */
+        .card-link {
+            display: block;
+            padding: 10px 12px;
+            background-color: #F9F8F4;
+            border-radius: 6px;
+            font-weight: 600; /* 字體稍微加粗 */
+            font-size: 0.95rem;
+            transition: all 0.3s;
+            border: 1px solid transparent;
+            text-align: center;
+            color: #5A6B5D;
+            white-space: nowrap;
+            overflow: hidden;
+            text-overflow: ellipsis;
+        }
+        .card-link:hover {
+            background-color: #8DA38E;
+            color: #ffffff;
+            border-color: #8DA38E;
+        }
+
+        /* 主要按鈕 - 增強顯眼度 */
+        .btn-primary {
+            background-color: #2F3E30;
+            color: #ffffff;
+            font-weight: 700; /* 最粗 */
+            padding: 0.85rem 2.8rem;
+            border-radius: 4px;
+            transition: all 0.3s ease;
+            letter-spacing: 0.1em; /* 增加字距 */
+            display: inline-block;
+            cursor: pointer;
+            box-shadow: 0 4px 6px rgba(0,0,0,0.15);
+            text-transform: uppercase; /* 大寫更顯眼 */
+        }
+        .btn-primary:hover {
+            background-color: #8DA38E; /* 懸停變為主色 */
+            transform: translateY(-2px);
+            box-shadow: 0 8px 15px rgba(141, 163, 142, 0.4);
+        }
+
+        /* 備忘錄與動畫 */
+        .memo-item {
+            animation: slideIn 0.3s ease-out forwards;
+            border-bottom: 1px dashed #8DA38E;
+        }
+        .memo-item:last-child {
+            border-bottom: none;
+        }
+        @keyframes slideIn {
+            from { opacity: 0; transform: translateY(5px); }
+            to { opacity: 1; transform: translateY(0); }
+        }
+        
+        .fade-in {
+            animation: fadeIn 0.8s ease-out forwards;
+            opacity: 0;
+            transform: translateY(20px);
+        }
+        @keyframes fadeIn {
+            to { opacity: 1; transform: translateY(0); }
+        }
+
+        .view-section { display: none; }
+        .view-section.active { display: block; }
+    </style>
+</head>
+<body class="flex flex-col min-h-screen relative">
+
+    <nav class="w-full py-5 px-6 md:px-12 flex justify-between items-center z-50 bg-sage-main sticky top-0 shadow-sm transition-all">
+        <div class="flex items-center gap-3 cursor-pointer group" onclick="switchView('home')">
+            <div class="w-10 h-10 rounded-full border border-forest-dark overflow-hidden bg-white shadow-sm transition-all duration-300 group-hover:shadow-md">
+                <img src="dog.png" alt="Logo" class="w-full h-full object-cover">
+            </div>
+            <div class="flex flex-col justify-center">
+                <span class="text-2xl font-bold tracking-wide leading-none font-serif nav-logo-text text-forest-dark">chuone</span>
+                </div>
+        </div>
+
+        <div class="hidden md:flex items-center gap-8">
+            <div onclick="switchView('ai')" class="nav-link text-sm uppercase">AI 區</div>
+            <div onclick="switchView('relax')" class="nav-link text-sm uppercase">放鬆區</div>
+            <div onclick="switchView('tools')" class="nav-link text-sm uppercase">工具區</div>
+            <div onclick="switchView('teach')" class="nav-link text-sm uppercase">教學區</div>
+            <div onclick="switchView('admin')" class="nav-link text-sm uppercase">行政區</div>
+            <div id="nav-countdown" class="bg-forest-dark text-white text-xs py-2 px-5 rounded cursor-default min-w-[160px] text-center flex items-center justify-center gap-2 shadow-md font-bold">
+                <i class="fas fa-snowflake opacity-70"></i> 載入中...
+            </div>
+        </div>
+
+        <button id="mobile-menu-btn" class="md:hidden text-2xl text-forest-dark focus:outline-none">
+            <i class="fas fa-bars"></i>
+        </button>
+    </nav>
+
+    <main class="flex-grow relative bg-cream">
+        
+        <div id="view-home" class="view-section active fade-in w-full">
+            <div class="absolute inset-0 z-0 bg-[url('https://images.unsplash.com/photo-1544161515-4ab6ce6db874?q=80&w=2070&auto=format&fit=crop')] bg-cover bg-center opacity-10"></div>
+            
+            <div class="relative z-10 max-w-6xl mx-auto px-6 md:px-12 py-16 md:py-24 flex flex-col items-center justify-center text-center">
+                
+                <div class="mb-4">
+                    <span class="text-xs font-bold tracking-[0.2em] text-sage-dark uppercase border-b border-sage-dark pb-1">rouwanyellowsoso</span>
+                </div>
+
+                <h1 class="text-5xl md:text-7xl font-serif font-medium text-forest-dark leading-tight mb-8">
+                    Chuone <br>
+                    <span class="italic text-sage-dark/90">Toolbox</span>
+                </h1>
+
+                <p class="text-gray-600 max-w-2xl mb-10 text-lg font-light leading-relaxed">
+                    There are so many beautiful reasons to be happy.
+                </p>
+
+                <div class="flex flex-col sm:flex-row gap-5 items-center mb-16">
+                    <button onclick="switchView('ai')" class="btn-primary text-base">
+                        View Services
+                    </button>
+                    <div class="flex items-center gap-3">
+                        <a href="https://chat.openai.com/" target="_blank" class="px-4 py-3 bg-white border border-gray-200 rounded text-forest-dark hover:border-forest-dark transition-all text-sm font-bold shadow-sm flex items-center gap-2 hover:bg-gray-50">
+                            <i class="fas fa-robot text-sage-dark"></i> ChatGPT
+                        </a>
+                        <a href="https://gemini.google.com/" target="_blank" class="px-4 py-3 bg-white border border-gray-200 rounded text-forest-dark hover:border-forest-dark transition-all text-sm font-bold shadow-sm flex items-center gap-2 hover:bg-gray-50">
+                            <i class="fab fa-google text-sage-dark"></i> Gemini
+                        </a>
+                    </div>
+                </div>
+
+                <div class="w-full max-w-4xl grid grid-cols-1 md:grid-cols-2 gap-0 bg-white rounded-lg overflow-hidden shadow-soft border border-gray-100">
+                    
+                    <div class="h-64 md:h-auto relative overflow-hidden bg-gray-200 group">
+                        <div id="slideshow-container" class="absolute inset-0 w-full h-full">
+                            <img src="dog1.png" class="dog-slide absolute inset-0 w-full h-full object-cover transition-opacity duration-1000 opacity-100" alt="Dog 1">
+                            <img src="dog2.png" class="dog-slide absolute inset-0 w-full h-full object-cover transition-opacity duration-1000 opacity-0" alt="Dog 2">
+                            <img src="dog3.png" class="dog-slide absolute inset-0 w-full h-full object-cover transition-opacity duration-1000 opacity-0" alt="Dog 3">
+                            <img src="dog4.png" class="dog-slide absolute inset-0 w-full h-full object-cover transition-opacity duration-1000 opacity-0" alt="Dog 4">
+                            <img src="dog5.png" class="dog-slide absolute inset-0 w-full h-full object-cover transition-opacity duration-1000 opacity-0" alt="Dog 5">
+                            <img src="dog6.png" class="dog-slide absolute inset-0 w-full h-full object-cover transition-opacity duration-1000 opacity-0" alt="Dog 6">
+                        </div>
+
+                        <div class="absolute inset-0 bg-forest-dark/30 z-10 transition-opacity group-hover:bg-forest-dark/10"></div>
+                        <div class="absolute bottom-6 left-6 text-white text-left z-20 drop-shadow-md">
+                            <h3 class="font-serif text-2xl italic">My Lovely Dogs</h3>
+                            <p class="text-sm opacity-90 font-sans tracking-wide">Always by my side.</p>
+                        </div>
+                    </div>
+
+                    <div class="p-8 md:p-10 bg-white text-left flex flex-col h-full relative z-30">
+                        <div class="flex justify-between items-center mb-6 border-b border-gray-100 pb-2">
+                            <h3 class="font-serif text-2xl text-forest-dark">To-Do List</h3>
+                            <i class="fas fa-pen-nib text-sage-dark"></i>
+                        </div>
+
+                        <div class="flex gap-2 mb-4">
+                            <input type="text" id="memo-input" 
+                                class="flex-grow px-0 py-2 border-0 border-b border-gray-300 font-sans text-forest-dark focus:ring-0 focus:border-forest-dark outline-none transition-all bg-transparent placeholder-gray-400"
+                                placeholder="新增待辦事項...">
+                            <button id="add-memo-button" class="text-forest-dark hover:text-sage-dark transition-colors px-2">
+                                <i class="fas fa-plus"></i>
+                            </button>
+                        </div>
+
+                        <div id="memo-list-container" class="flex-grow overflow-y-auto max-h-[200px] space-y-3 custom-scrollbar">
+                            <div class="text-center text-gray-400 text-xs py-8 font-light italic">
+                                暫無事項，享受當下
+                            </div>
+                        </div>
+                    </div>
+                </div>
+
+            </div>
+        </div>
+
+        <div id="view-ai" class="view-section py-20 min-h-screen">
+            <div class="max-w-7xl mx-auto px-6 md:px-12">
+                <div class="flex items-center gap-6 mb-16 fade-in border-b border-gray-200 pb-6">
+                    <button onclick="switchView('home')" class="text-gray-400 hover:text-forest-dark transition-colors"><i class="fas fa-arrow-left text-xl"></i></button>
+                    <div>
+                        <span class="text-sage-dark text-sm tracking-widest uppercase font-bold">Artificial Intelligence</span>
+                        <h2 class="text-4xl font-serif text-forest-dark mt-1">AI 人工智慧區</h2>
+                    </div>
+                </div>
+                
+                <div class="grid grid-cols-1 sm:grid-cols-2 lg:grid-cols-3 gap-8 fade-in" style="animation-delay: 0.1s;">
+                    <div class="resource-card p-8">
+                        <h4 class="font-serif text-xl mb-6 text-forest-dark border-l-2 border-sage-dark pl-3">熱門 AI 工具</h4>
+                        <div class="space-y-3">
+                            <a href="https://chat.openai.com/" target="_blank" class="card-link">ChatGPT</a>
+                            <a href="https://claude.ai/" target="_blank" class="card-link">Claude</a>
+                            <a href="https://www.perplexity.ai/" target="_blank" class="card-link">Perplexity</a>
+                            <a href="https://makersuite.google.com/" target="_blank" class="card-link">Google AI Studio</a>
+                        </div>
+                    </div>
+                    <div class="resource-card p-8">
+                        <h4 class="font-serif text-xl mb-6 text-forest-dark border-l-2 border-sage-dark pl-3">Google AI</h4>
+                        <div class="space-y-3">
+                            <a href="https://gemini.google.com/" target="_blank" class="card-link">Gemini</a>
+                            <a href="https://notebooklm.google.com/" target="_blank" class="card-link">Notebook LM</a>
+                            <a href="https://stitch.withgoogle.com/" target="_blank" class="card-link">Stitch</a>
+                        </div>
+                    </div>
+                    <div class="resource-card p-8">
+                        <h4 class="font-serif text-xl mb-6 text-forest-dark border-l-2 border-sage-dark pl-3">教育專用</h4>
+                        <div class="space-y-3">
+                            <a href="https://app.edcafe.ai/me/home" target="_blank" class="card-link">EDcafe</a>
+                        </div>
+                    </div>
+                </div>
+            </div>
+        </div>
+
+        <div id="view-relax" class="view-section py-20 min-h-screen">
+            <div class="max-w-7xl mx-auto px-6 md:px-12">
+                <div class="flex items-center gap-6 mb-16 fade-in border-b border-gray-200 pb-6">
+                    <button onclick="switchView('home')" class="text-gray-400 hover:text-forest-dark transition-colors"><i class="fas fa-arrow-left text-xl"></i></button>
+                    <div>
+                        <span class="text-sage-dark text-sm tracking-widest uppercase font-bold">Leisure Time</span>
+                        <h2 class="text-4xl font-serif text-forest-dark mt-1">放鬆與休閒區</h2>
+                    </div>
+                </div>
+                
+                <div class="grid grid-cols-1 sm:grid-cols-2 lg:grid-cols-3 gap-8 fade-in" style="animation-delay: 0.1s;">
+                    <div class="resource-card p-8">
+                        <h4 class="font-serif text-xl mb-6 text-forest-dark border-l-2 border-sage-dark pl-3">社群平台</h4>
+                        <div class="space-y-3">
+                            <a href="https://www.facebook.com/" target="_blank" class="card-link">Facebook</a>
+                            <a href="https://www.instagram.com/" target="_blank" class="card-link">Instagram</a>
+                            <a href="https://www.threads.net/" target="_blank" class="card-link">Threads</a>
+                        </div>
+                    </div>
+                    <div class="resource-card p-8">
+                        <h4 class="font-serif text-xl mb-6 text-forest-dark border-l-2 border-sage-dark pl-3">影音娛樂</h4>
+                        <div class="space-y-3">
+                            <a href="https://www.youtube.com/" target="_blank" class="card-link">YouTube</a>
+                            <a href="https://94580.net/" target="_blank" class="card-link">94580</a>
+                        </div>
+                    </div>
+                    <div class="resource-card p-8">
+                        <h4 class="font-serif text-xl mb-6 text-forest-dark border-l-2 border-sage-dark pl-3">線上購物</h4>
+                        <div class="space-y-3">
+                            <a href="https://shopee.tw/" target="_blank" class="card-link">蝦皮購物</a>
+                            <a href="https://www.momoshop.com.tw/" target="_blank" class="card-link">Momo購物</a>
+                            <a href="https://24h.pchome.com.tw/" target="_blank" class="card-link">PChome 24h</a>
+                        </div>
+                    </div>
+                </div>
+            </div>
+        </div>
+
+        <div id="view-tools" class="view-section py-20 min-h-screen">
+            <div class="max-w-7xl mx-auto px-6 md:px-12">
+                <div class="flex items-center gap-6 mb-16 fade-in border-b border-gray-200 pb-6">
+                    <button onclick="switchView('home')" class="text-gray-400 hover:text-forest-dark transition-colors"><i class="fas fa-arrow-left text-xl"></i></button>
+                    <div>
+                        <span class="text-sage-dark text-sm tracking-widest uppercase font-bold">Productivity</span>
+                        <h2 class="text-4xl font-serif text-forest-dark mt-1">實用工具區</h2>
+                    </div>
+                </div>
+                
+                <div class="grid grid-cols-1 sm:grid-cols-2 lg:grid-cols-3 gap-8 fade-in" style="animation-delay: 0.1s;">
+                    <div class="resource-card p-8">
+                        <h4 class="font-serif text-xl mb-6 text-forest-dark border-l-2 border-sage-dark pl-3">雲端與日常</h4>
+                        <div class="space-y-3">
+                            <a href="https://drive.google.com/" target="_blank" class="card-link">Google 雲端</a>
+                            <a href="https://www.notion.so/" target="_blank" class="card-link">Notion</a>
+                            <a href="https://keep.google.com/" target="_blank" class="card-link">Keep</a>
+                            <a href="https://calendar.google.com/" target="_blank" class="card-link">Google 日曆</a>
+                            <a href="https://mail.google.com/" target="_blank" class="card-link">Gmail</a>
+                            <a href="https://translate.google.com/" target="_blank" class="card-link">Google 翻譯</a>
+                            <a href="https://github.com/chuoneone" target="_blank" class="card-link">GitHub</a>
+                        </div>
+                    </div>
+                    <div class="resource-card p-8">
+                        <h4 class="font-serif text-xl mb-6 text-forest-dark border-l-2 border-sage-dark pl-3">Office 與設計</h4>
+                        <div class="space-y-3">
+                            <a href="https://docs.google.com/" target="_blank" class="card-link">Google 文件</a>
+                            <a href="https://slides.google.com/" target="_blank" class="card-link">Google 簡報</a>
+                            <a href="https://sheets.google.com/" target="_blank" class="card-link">Google 試算表</a>
+                            <a href="https://forms.google.com/" target="_blank" class="card-link">Google 表單</a>
+                            <a href="https://login.microsoftonline.com/" target="_blank" class="card-link">Office 365</a>
+                            <a href="https://www.canva.com/zh_tw/" target="_blank" class="card-link">Canva</a>
+                        </div>
+                    </div>
+                    <div class="resource-card p-8">
+                        <h4 class="font-serif text-xl mb-6 text-forest-dark border-l-2 border-sage-dark pl-3">教室互動工具</h4>
+                        <div class="space-y-3">
+                            <a href="https://classroom.google.com/" target="_blank" class="card-link">Classroom</a>
+                            <a href="https://soundoftext.com/" target="_blank" class="card-link">文字轉語音</a>
+                            <a href="https://naozhong.tw/設置計時器-5-分鐘/" target="_blank" class="card-link">線上計時器</a>
+                            <a href="https://wordwall.net/" target="_blank" class="card-link">Wordwall</a>
+                            <a href="https://quizizz.com/" target="_blank" class="card-link">Quizizz</a>
+                            <a href="https://dashboard.blooket.com/" target="_blank" class="card-link">Blooket</a>
+                            <a href="https://www.gimkit.com/" target="_blank" class="card-link">Gimkit</a>
+                            <a href="https://create.kahoot.it/" target="_blank" class="card-link">Kahoot</a>
+                        </div>
+                    </div>
+                </div>
+            </div>
+        </div>
+
+        <div id="view-teach" class="view-section py-20 min-h-screen">
+            <div class="max-w-7xl mx-auto px-6 md:px-12">
+                <div class="flex items-center gap-6 mb-16 fade-in border-b border-gray-200 pb-6">
+                    <button onclick="switchView('home')" class="text-gray-400 hover:text-forest-dark transition-colors"><i class="fas fa-arrow-left text-xl"></i></button>
+                    <div>
+                        <span class="text-sage-dark text-sm tracking-widest uppercase font-bold">Teaching Resources</span>
+                        <h2 class="text-4xl font-serif text-forest-dark mt-1">教學資源區</h2>
+                    </div>
+                </div>
+                
+                <div class="grid grid-cols-1 sm:grid-cols-2 lg:grid-cols-4 gap-6 fade-in" style="animation-delay: 0.1s;">
+                    <div class="resource-card p-6">
+                        <h4 class="font-serif text-lg mb-4 text-forest-dark font-bold">書商資源</h4>
+                        <div class="space-y-3">
+                            <a href="https://edisc3.hle.com.tw/" target="_blank" class="card-link">翰林電子書</a>
+                            <a href="https://nanibox3.oneclass.com.tw/" target="_blank" class="card-link">南一資源</a>
+                            <a href="https://digitalmaster.knsh.com.tw/" target="_blank" class="card-link">康軒電子書</a>
+                            <a href="https://hanlindigi.hle.com.tw/" target="_blank" class="card-link">翰林數位平台</a>
+                            <a href="https://mgz.hle.com.tw/" target="_blank" class="card-link">翰林期刊大師</a>
+                        </div>
+                    </div>
+                    <div class="resource-card p-6">
+                        <h4 class="font-serif text-lg mb-4 text-forest-dark font-bold">學科輔助</h4>
+                        <div class="space-y-3">
+                            <a href="https://emath.math.ncu.edu.tw/" target="_blank" class="card-link">子由數學</a>
+                            <a href="https://subjects.modernedu.hk/" target="_blank" class="card-link">數學 App</a>
+                            <a href="https://polypad.amplify.com/" target="_blank" class="card-link">Mathigon</a>
+                            <a href="https://www.geogebra.org/" target="_blank" class="card-link">繪圖計算機</a>
+                        </div>
+                    </div>
+                    <div class="resource-card p-6">
+                        <h4 class="font-serif text-lg mb-4 text-forest-dark font-bold">線上學習</h4>
+                        <div class="space-y-3">
+                            <a href="https://aaclearningbackend.azurewebsites.net/" target="_blank" class="card-link">AAC</a>
+                            <a href="https://www.learnmode.net/" target="_blank" class="card-link">學習吧</a>
+                            <a href="https://teach.classdojo.com/" target="_blank" class="card-link">ClassDojo</a>
+                            <a href="https://sites.google.com/view/specialchu/home" target="_blank" class="card-link">線上學習區</a>
+                            <a href="https://toytheater.com/" target="_blank" class="card-link">Toy Theater</a>
+                        </div>
+                    </div>
+                    <div class="resource-card p-6">
+                        <h4 class="font-serif text-lg mb-4 text-forest-dark font-bold">出題系統</h4>
+                        <div class="space-y-3">
+                            <a href="https://nanipaper.oneclass.com.tw/" target="_blank" class="card-link">南一出題</a>
+                            <a href="https://quiz.knsh.com.tw/" target="_blank" class="card-link">康軒出題</a>
+                            <a href="https://testbank.hle.com.tw/" target="_blank" class="card-link">翰林出題</a>
+                        </div>
+                    </div>
+                </div>
+            </div>
+        </div>
+
+        <div id="view-admin" class="view-section py-20 min-h-screen">
+            <div class="max-w-7xl mx-auto px-6 md:px-12">
+                <div class="flex items-center gap-6 mb-16 fade-in border-b border-gray-200 pb-6">
+                    <button onclick="switchView('home')" class="text-gray-400 hover:text-forest-dark transition-colors"><i class="fas fa-arrow-left text-xl"></i></button>
+                    <div>
+                        <span class="text-sage-dark text-sm tracking-widest uppercase font-bold">Administration</span>
+                        <h2 class="text-4xl font-serif text-forest-dark mt-1">行政資源區</h2>
+                    </div>
+                </div>
+                
+                <div class="grid grid-cols-1 sm:grid-cols-2 lg:grid-cols-3 gap-8 fade-in" style="animation-delay: 0.1s;">
+                    <div class="resource-card p-8">
+                        <h4 class="font-serif text-xl mb-6 text-forest-dark border-l-2 border-sage-dark pl-3">行政系統</h4>
+                        <div class="space-y-3">
+                            <a href="https://www.set.edu.tw/" target="_blank" class="card-link">特通網</a>
+                            <a href="https://eschool.hlc.edu.tw/" target="_blank" class="card-link">全誼校務系統</a>
+                            <a href="https://news.hlc.edu.tw/" target="_blank" class="card-link">花蓮處務公告</a>
+                            <a href="https://srec.hlc.edu.tw/" target="_blank" class="card-link">特教資源網</a>
+                        </div>
+                    </div>
+                    <div class="resource-card p-8">
+                        <h4 class="font-serif text-xl mb-6 text-forest-dark border-l-2 border-sage-dark pl-3">研習與表件</h4>
+                        <div class="space-y-3">
+                            <a href="https://special.moe.gov.tw/" target="_blank" class="card-link">特教研習</a>
+                            <a href="https://www1.inservice.edu.tw/" target="_blank" class="card-link">全國研習</a>
+                            <a href="https://drive.google.com/drive/folders/15F9f5dW6PHYode_w1opdEKLYkoNKmnMe" target="_blank" class="card-link">鑑定表單</a>
+                        </div>
+                    </div>
+                    <div class="resource-card p-8">
+                        <h4 class="font-serif text-xl mb-6 text-forest-dark border-l-2 border-sage-dark pl-3">素材圖庫</h4>
+                        <div class="space-y-3">
+                            <a href="https://www.irasutoya.com/" target="_blank" class="card-link">Irasutoya</a>
+                            <a href="https://www.flaticon.com/" target="_blank" class="card-link">Flaticon</a>
+                            <a href="https://chojugiga.com/" target="_blank" class="card-link">鳥獸戲畫</a>
+                        </div>
+                    </div>
+                </div>
+            </div>
+        </div>
+
+    </main>
+
+    <footer class="bg-sage-main py-8 mt-auto border-t border-sage-dark/10">
+        <div class="max-w-7xl mx-auto px-6 text-center">
+            <div class="mb-4">
+                 <i class="fas fa-shapes text-2xl text-forest-dark opacity-50"></i>
+            </div>
+            <p class="text-forest-dark font-bold text-sm tracking-wide">
+                &copy; 2025 Chuone Toolbox. All rights reserved.
+            </p>
+            <p class="text-forest-dark/70 text-xs mt-2 font-serif italic">
+                Designed with serenity in mind.
+            </p>
+        </div>
+    </footer>
+
+    <script>
+        document.addEventListener('DOMContentLoaded', () => {
+            
+            // --- 狗狗圖片輪播功能 ---
+            function startDogSlideshow() {
+                const slides = document.querySelectorAll('.dog-slide');
+                let currentSlide = 0;
+                const totalSlides = slides.length;
+                const slideInterval = 4000; // 每 4 秒換一張圖
+
+                if (totalSlides === 0) return;
+
+                setInterval(() => {
+                    // 1. 隱藏當前圖片
+                    slides[currentSlide].classList.remove('opacity-100');
+                    slides[currentSlide].classList.add('opacity-0');
+
+                    // 2. 計算下一張圖片的索引
+                    currentSlide = (currentSlide + 1) % totalSlides;
+
+                    // 3. 顯示下一張圖片
+                    slides[currentSlide].classList.remove('opacity-0');
+                    slides[currentSlide].classList.add('opacity-100');
+                }, slideInterval);
+            }
+            startDogSlideshow();
+
+            // --- 備忘錄核心邏輯 ---
+            const memoInput = document.getElementById('memo-input');
+            const addMemoButton = document.getElementById('add-memo-button');
+            const memoListContainer = document.getElementById('memo-list-container');
+            const LOCAL_STORAGE_MEMO_KEY = 'chupeiyi.memos.v2';
+            let memos = [];
+
+            function loadMemos() {
+                const storedMemos = localStorage.getItem(LOCAL_STORAGE_MEMO_KEY);
+                if (storedMemos) memos = JSON.parse(storedMemos);
+                renderMemos();
+            }
+
+            function saveMemos() {
+                localStorage.setItem(LOCAL_STORAGE_MEMO_KEY, JSON.stringify(memos));
+            }
+
+            function renderMemos() {
+                if (!memoListContainer) return;
+                memoListContainer.innerHTML = '';
+
+                if (memos.length === 0) {
+                    memoListContainer.innerHTML = `
+                        <div class="text-center text-gray-400 text-xs py-8 font-light italic">
+                            暫無事項，享受當下
+                        </div>`;
+                    return;
+                }
+
+                memos.forEach(memo => {
+                    const div = document.createElement('div');
+                    div.className = 'memo-item flex justify-between items-center py-3';
+                    div.innerHTML = `
+                        <span class="text-sm text-forest-dark break-all font-medium">${memo.text}</span>
+                        <button class="text-gray-300 hover:text-red-400 transition-colors p-1" onclick="deleteMemo('${memo.id}')">
+                            <i class="fas fa-times"></i>
+                        </button>
+                    `;
+                    memoListContainer.appendChild(div);
+                });
+            }
+
+            window.deleteMemo = function(id) {
+                memos = memos.filter(m => m.id !== id);
+                saveMemos();
+                renderMemos();
+            };
+
+            function addMemo() {
+                const text = memoInput.value.trim();
+                if (!text) return;
+                const newMemo = { id: Date.now().toString(), text };
+                memos.unshift(newMemo);
+                saveMemos();
+                renderMemos();
+                memoInput.value = '';
+            }
+
+            if (addMemoButton) addMemoButton.addEventListener('click', addMemo);
+            if (memoInput) {
+                memoInput.addEventListener('keypress', (e) => {
+                    if (e.key === 'Enter') addMemo();
+                });
+            }
+
+            loadMemos();
+
+            // --- 倒數計時功能 ---
+            function updateCountdown() {
+                const countdownElement = document.getElementById('nav-countdown'); 
+                if (!countdownElement) return;
+                
+                // 設定寒假日期
+                const targetDate = new Date('2026-01-24');
+                const today = new Date();
+                const diffTime = targetDate - today;
+                const diffDays = Math.ceil(diffTime / (1000 * 60 * 60 * 24));
+
+                let countdownText = '';
+                if (diffDays > 0) {
+                    countdownText = `寒假倒數 ${diffDays} 天`;
+                } else if (diffDays === 0) {
+                    countdownText = `寒假就是今天！🎉`;
+                } else {
+                    countdownText = `假期愉快！`;
+                }
+                countdownElement.innerHTML = `<i class="fas fa-snowflake"></i> ${countdownText}`;
+            }
+            updateCountdown();
+            setInterval(updateCountdown, 60000);
+        });
+
+        // --- 視圖切換邏輯 ---
+        function switchView(viewId) {
+            document.querySelectorAll('.view-section').forEach(el => {
+                el.classList.remove('active');
+            });
+
+            const target = document.getElementById('view-' + viewId);
+            if(target) {
+                target.classList.add('active');
+                target.classList.remove('fade-in');
+                void target.offsetWidth; 
+                target.classList.add('fade-in');
+            }
+            
+            window.scrollTo({ top: 0, behavior: 'smooth' });
+
+            const mobileMenu = document.getElementById('mobile-menu');
+            if(mobileMenu && !mobileMenu.classList.contains('hidden')) {
+                toggleMobileMenu();
+            }
+        }
+
+        // --- 手機版選單控制 ---
+        const mobileBtn = document.getElementById('mobile-menu-btn');
+        const nav = document.querySelector('nav');
+        let mobileMenuDiv = document.getElementById('mobile-menu');
+
+        if (!mobileMenuDiv) {
+            mobileMenuDiv = document.createElement('div');
+            mobileMenuDiv.id = 'mobile-menu';
+            mobileMenuDiv.className = 'md:hidden absolute top-full left-0 w-full bg-sage-main shadow-xl border-t border-forest-dark/10 hidden flex-col p-6 gap-4 z-40';
+            mobileMenuDiv.innerHTML = `
+                <div onclick="switchView('ai')" class="block py-3 font-medium text-forest-dark cursor-pointer border-b border-forest-dark/10">AI 區</div>
+                <div onclick="switchView('relax')" class="block py-3 font-medium text-forest-dark cursor-pointer border-b border-forest-dark/10">放鬆區</div>
+                <div onclick="switchView('tools')" class="block py-3 font-medium text-forest-dark cursor-pointer border-b border-forest-dark/10">工具區</div>
+                <div onclick="switchView('teach')" class="block py-3 font-medium text-forest-dark cursor-pointer border-b border-forest-dark/10">教學區</div>
+                <div onclick="switchView('admin')" class="block py-3 font-medium text-forest-dark cursor-pointer">行政區</div>
+            `;
+            nav.appendChild(mobileMenuDiv);
+        }
+
+        function toggleMobileMenu() {
+            mobileMenuDiv.classList.toggle('hidden');
+            mobileMenuDiv.classList.toggle('flex');
+            const icon = mobileBtn.querySelector('i');
+            if (mobileMenuDiv.classList.contains('hidden')) {
+                icon.classList.remove('fa-times');
+                icon.classList.add('fa-bars');
+            } else {
+                icon.classList.remove('fa-bars');
+                icon.classList.add('fa-times');
+            }
+        }
+
+        mobileBtn.addEventListener('click', toggleMobileMenu);
+    </script>
+</body>
+</html>
