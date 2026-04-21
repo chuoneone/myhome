@@ -1,5 +1,6 @@
 <!DOCTYPE html>
 <html lang="zh-TW">
+
 <head>
     <meta charset="UTF-8" />
     <meta name="viewport" content="width=device-width, initial-scale=1.0" />
@@ -9,11 +10,19 @@
 
     <link rel="preconnect" href="https://fonts.googleapis.com" />
     <link rel="preconnect" href="https://fonts.gstatic.com" crossorigin />
-    <link href="https://fonts.googleapis.com/css2?family=Lora:ital,wght@0,400;0,700;1,400&family=Plus+Jakarta+Sans:wght@400;500;600;700&family=Noto+Sans+TC:wght@300;400;500;700&display=swap" rel="stylesheet" />
+    <link
+        href="https://fonts.googleapis.com/css2?family=Lora:ital,wght@0,400;0,700;1,400&family=Plus+Jakarta+Sans:wght@400;500;600;700&family=Noto+Sans+TC:wght@300;400;500;700&display=swap"
+        rel="stylesheet" />
     <link rel="stylesheet" href="https://cdnjs.cloudflare.com/ajax/libs/font-awesome/6.5.1/css/all.min.css" />
 
     <style>
-        *, *::before, *::after { box-sizing: border-box; margin: 0; padding: 0; }
+        *,
+        *::before,
+        *::after {
+            box-sizing: border-box;
+            margin: 0;
+            padding: 0;
+        }
 
         body {
             font-family: 'Plus Jakarta Sans', 'Noto Sans TC', sans-serif;
@@ -24,10 +33,22 @@
         }
 
         /* ── Scrollbar ── */
-        ::-webkit-scrollbar { width: 7px; }
-        ::-webkit-scrollbar-track { background: #F2F7F8; }
-        ::-webkit-scrollbar-thumb { background: #B3DEE5; border-radius: 4px; }
-        ::-webkit-scrollbar-thumb:hover { background: #FFA101; }
+        ::-webkit-scrollbar {
+            width: 7px;
+        }
+
+        ::-webkit-scrollbar-track {
+            background: #F2F7F8;
+        }
+
+        ::-webkit-scrollbar-thumb {
+            background: #B3DEE5;
+            border-radius: 4px;
+        }
+
+        ::-webkit-scrollbar-thumb:hover {
+            background: #FFA101;
+        }
 
         /* ════════════════════════
            NAVBAR
@@ -37,8 +58,8 @@
             top: 0;
             z-index: 50;
             background: #B3DEE5;
-            border-bottom: 1px solid rgba(255,255,255,0.55);
-            box-shadow: 0 2px 10px -3px rgba(49,82,91,0.1);
+            border-bottom: 1px solid rgba(255, 255, 255, 0.55);
+            box-shadow: 0 2px 10px -3px rgba(49, 82, 91, 0.1);
             padding: 10px 20px;
             display: flex;
             align-items: center;
@@ -55,6 +76,7 @@
             text-decoration: none;
             flex-shrink: 0;
         }
+
         .nav-logo img {
             width: 36px;
             height: 36px;
@@ -63,7 +85,11 @@
             object-fit: cover;
             transition: border-color 0.2s;
         }
-        .nav-logo:hover img { border-color: #FFA101; }
+
+        .nav-logo:hover img {
+            border-color: #FFA101;
+        }
+
         .nav-logo-text {
             font-family: 'Lora', serif;
             font-size: 1.05rem;
@@ -72,7 +98,10 @@
             white-space: nowrap;
             transition: color 0.2s;
         }
-        .nav-logo:hover .nav-logo-text { color: white; }
+
+        .nav-logo:hover .nav-logo-text {
+            color: white;
+        }
 
         /* Search bar */
         #search-wrapper {
@@ -80,24 +109,30 @@
             position: relative;
             max-width: 580px;
         }
+
         #search-input {
             width: 100%;
             padding: 8px 38px 8px 16px;
-            border: 1.5px solid rgba(49,82,91,0.2);
+            border: 1.5px solid rgba(49, 82, 91, 0.2);
             border-radius: 30px;
             font-size: 0.88rem;
             font-family: inherit;
             color: #31525B;
-            background: rgba(255,255,255,0.72);
+            background: rgba(255, 255, 255, 0.72);
             outline: none;
             transition: border-color 0.2s, box-shadow 0.2s, background 0.2s;
         }
+
         #search-input:focus {
             border-color: #FFA101;
             background: white;
-            box-shadow: 0 0 0 3px rgba(255,161,1,0.18);
+            box-shadow: 0 0 0 3px rgba(255, 161, 1, 0.18);
         }
-        #search-input::placeholder { color: #7AAAB3; }
+
+        #search-input::placeholder {
+            color: #7AAAB3;
+        }
+
         #search-clear {
             position: absolute;
             right: 13px;
@@ -109,7 +144,10 @@
             display: none;
             transition: color 0.2s;
         }
-        #search-clear:hover { color: #FFA101; }
+
+        #search-clear:hover {
+            color: #FFA101;
+        }
 
         /* Countdown */
         #nav-countdown {
@@ -156,9 +194,10 @@
             position: relative;
             aspect-ratio: 4 / 3;
             background: #B3DEE5;
-            box-shadow: 0 4px 18px -5px rgba(49,82,91,0.15);
+            box-shadow: 0 4px 18px -5px rgba(49, 82, 91, 0.15);
             flex-shrink: 0;
         }
+
         #dog-panel img.dog-slide {
             position: absolute;
             inset: 0;
@@ -167,14 +206,22 @@
             object-fit: cover;
             transition: opacity 1s ease;
         }
-        #dog-panel img.dog-slide.opacity-0 { opacity: 0; }
-        #dog-panel img.dog-slide.opacity-100 { opacity: 1; }
+
+        #dog-panel img.dog-slide.opacity-0 {
+            opacity: 0;
+        }
+
+        #dog-panel img.dog-slide.opacity-100 {
+            opacity: 1;
+        }
+
         #dog-panel .dog-gradient {
             position: absolute;
             inset: 0;
-            background: linear-gradient(to top, rgba(49,82,91,0.45) 0%, transparent 55%);
+            background: linear-gradient(to top, rgba(49, 82, 91, 0.45) 0%, transparent 55%);
             z-index: 1;
         }
+
         #dog-panel .dog-caption {
             position: absolute;
             bottom: 12px;
@@ -182,15 +229,70 @@
             color: white;
             z-index: 2;
         }
+
         #dog-panel .dog-caption h3 {
             font-family: 'Lora', serif;
             font-size: 0.95rem;
             font-style: italic;
         }
+
         #dog-panel .dog-caption p {
             font-size: 0.7rem;
             opacity: 0.85;
             margin-top: 2px;
+        }
+
+        /* Todo List */
+        #todo-panel {
+            border-radius: 15px;
+            overflow: hidden;
+            background: white;
+            box-shadow: 0 4px 18px -5px rgba(49, 82, 91, 0.1);
+            border: 1px solid #E5E7EB;
+            display: flex;
+            flex-direction: column;
+            position: relative;
+        }
+
+        #todo-loader {
+            position: absolute;
+            inset: 0;
+            background: rgba(255, 255, 255, 0.7);
+            display: flex;
+            align-items: center;
+            justify-content: center;
+            z-index: 10;
+            display: none;
+        }
+
+        #todo-loader i {
+            color: #FFA101;
+            font-size: 1.5rem;
+        }
+
+        .todo-header {
+            display: flex;
+            align-items: center;
+            gap: 8px;
+            padding: 12px 16px;
+            background: #FFA101;
+            color: white;
+        }
+
+        .todo-header i {
+            font-size: 0.95rem;
+        }
+
+        .todo-header span {
+            font-weight: 700;
+            font-size: 0.9rem;
+        }
+
+        .todo-sync-status {
+            margin-left: auto;
+            font-size: 0.7rem;
+            opacity: 0.8;
+            font-weight: normal;
         }
 
         /* Google Keep */
@@ -198,9 +300,10 @@
             border-radius: 15px;
             overflow: hidden;
             background: white;
-            box-shadow: 0 4px 18px -5px rgba(49,82,91,0.1);
+            box-shadow: 0 4px 18px -5px rgba(49, 82, 91, 0.1);
             border: 1px solid #E5E7EB;
         }
+
         .keep-header {
             display: flex;
             align-items: center;
@@ -209,8 +312,16 @@
             background: #FBBC04;
             color: #31525B;
         }
-        .keep-header i { font-size: 0.95rem; }
-        .keep-header span { font-weight: 700; font-size: 0.82rem; }
+
+        .keep-header i {
+            font-size: 0.95rem;
+        }
+
+        .keep-header span {
+            font-weight: 700;
+            font-size: 0.82rem;
+        }
+
         .keep-header a {
             margin-left: auto;
             color: #31525B;
@@ -219,7 +330,10 @@
             text-decoration: none;
             transition: opacity 0.2s;
         }
-        .keep-header a:hover { opacity: 1; }
+
+        .keep-header a:hover {
+            opacity: 1;
+        }
 
         #keep-frame {
             width: 100%;
@@ -227,18 +341,21 @@
             border: none;
             display: block;
         }
+
         /* Fallback if Keep blocks iframe */
         #keep-fallback {
             display: none;
             padding: 24px 16px;
             text-align: center;
         }
+
         #keep-fallback p {
             font-size: 0.82rem;
             color: #6B7280;
             line-height: 1.6;
             margin-bottom: 14px;
         }
+
         #keep-fallback a {
             display: inline-flex;
             align-items: center;
@@ -252,7 +369,11 @@
             text-decoration: none;
             transition: opacity 0.2s, transform 0.2s;
         }
-        #keep-fallback a:hover { opacity: 0.88; transform: translateY(-1px); }
+
+        #keep-fallback a:hover {
+            opacity: 0.88;
+            transform: translateY(-1px);
+        }
 
         /* ── Tool cards grid (left) ── */
         #tools-grid {
@@ -268,15 +389,19 @@
             border-radius: 14px;
             padding: 16px;
             transition: transform 0.3s ease, box-shadow 0.3s ease, border-color 0.3s ease;
-            box-shadow: 0 2px 6px rgba(0,0,0,0.025);
+            box-shadow: 0 2px 6px rgba(0, 0, 0, 0.025);
         }
+
         .resource-card:hover {
             transform: translateY(-4px);
-            box-shadow: 0 10px 28px -8px rgba(49,82,91,0.12);
+            box-shadow: 0 10px 28px -8px rgba(49, 82, 91, 0.12);
             border-color: #B3DEE5;
             border-bottom-color: #FFA101;
         }
-        .resource-card.search-hidden { display: none; }
+
+        .resource-card.search-hidden {
+            display: none;
+        }
 
         .card-header {
             display: flex;
@@ -286,11 +411,12 @@
             margin-bottom: 12px;
             border-bottom: 1px solid #F3F4F6;
         }
+
         .card-icon {
             width: 30px;
             height: 30px;
             border-radius: 50%;
-            background: rgba(255,161,1,0.12);
+            background: rgba(255, 161, 1, 0.12);
             color: #FFA101;
             display: flex;
             align-items: center;
@@ -298,6 +424,7 @@
             font-size: 0.82rem;
             flex-shrink: 0;
         }
+
         .card-title {
             font-family: 'Lora', serif;
             font-size: 0.98rem;
@@ -327,13 +454,18 @@
             transition: background 0.22s, color 0.22s, transform 0.22s, box-shadow 0.22s;
             border: 1px solid transparent;
         }
+
         .card-link:hover {
             background: #FFA101;
             color: white;
-            box-shadow: 0 4px 10px -2px rgba(255,161,1,0.35);
+            box-shadow: 0 4px 10px -2px rgba(255, 161, 1, 0.35);
             transform: translateY(-1px);
         }
-        .card-link.search-hidden { display: none; }
+
+        .card-link.search-hidden {
+            display: none;
+        }
+
         .card-link mark {
             background: #FFA101;
             color: white;
@@ -347,6 +479,7 @@
             grid-template-columns: repeat(4, 1fr);
             gap: 8px;
         }
+
         .icon-link {
             display: flex;
             align-items: center;
@@ -361,16 +494,23 @@
             border: 1px solid transparent;
             cursor: pointer;
         }
+
         .icon-link:hover {
             background: #FFA101;
             color: white;
             transform: translateY(-2px);
-            box-shadow: 0 4px 10px -2px rgba(255,161,1,0.38);
+            box-shadow: 0 4px 10px -2px rgba(255, 161, 1, 0.38);
         }
-        .icon-link.search-hidden { display: none; }
+
+        .icon-link.search-hidden {
+            display: none;
+        }
 
         /* Custom Tooltip */
-        .icon-link { position: relative; }
+        .icon-link {
+            position: relative;
+        }
+
         .icon-link::before {
             content: attr(data-tooltip);
             position: absolute;
@@ -389,11 +529,13 @@
             pointer-events: none;
             z-index: 100;
         }
+
         .icon-link:hover::before {
             opacity: 1;
             visibility: visible;
             transform: translateX(-50%) translateY(0);
         }
+
         .icon-link::after {
             content: '';
             position: absolute;
@@ -408,6 +550,7 @@
             pointer-events: none;
             z-index: 100;
         }
+
         .icon-link:hover::after {
             opacity: 1;
             visibility: visible;
@@ -421,28 +564,49 @@
             padding: 52px 0;
             color: #A0B4B8;
         }
-        #search-empty i { font-size: 2rem; margin-bottom: 10px; display: block; }
-        #search-empty p { font-size: 0.9rem; }
+
+        #search-empty i {
+            font-size: 2rem;
+            margin-bottom: 10px;
+            display: block;
+        }
+
+        #search-empty p {
+            font-size: 0.9rem;
+        }
 
         /* ── Footer ── */
         footer {
             background: #B3DEE5;
-            border-top: 1px solid rgba(255,255,255,0.5);
+            border-top: 1px solid rgba(255, 255, 255, 0.5);
             padding: 20px 24px;
             text-align: center;
             font-size: 0.78rem;
             color: #31525B;
             font-weight: 600;
         }
-        footer span { opacity: 0.6; font-style: italic; font-family: 'Lora', serif; }
+
+        footer span {
+            opacity: 0.6;
+            font-style: italic;
+            font-family: 'Lora', serif;
+        }
 
         /* ── Fade in ── */
         .fade-in {
             animation: fadeUp 0.55s ease-out both;
         }
+
         @keyframes fadeUp {
-            from { opacity: 0; transform: translateY(14px); }
-            to   { opacity: 1; transform: translateY(0); }
+            from {
+                opacity: 0;
+                transform: translateY(14px);
+            }
+
+            to {
+                opacity: 1;
+                transform: translateY(0);
+            }
         }
 
         /* ── Responsive ── */
@@ -451,26 +615,41 @@
                 grid-template-columns: 1fr;
                 padding: 14px 14px 40px;
             }
+
             #sidebar {
                 position: static;
                 order: -1;
                 flex-direction: row;
                 flex-wrap: wrap;
             }
+
             #dog-panel {
                 flex: 1 1 220px;
                 aspect-ratio: 4 / 3;
                 min-width: 160px;
             }
-            #keep-panel { flex: 2 1 280px; }
-            #keep-frame { height: 280px; }
+
+            #keep-panel {
+                flex: 2 1 280px;
+            }
+
+            #keep-frame {
+                height: 280px;
+            }
         }
+
         @media (max-width: 540px) {
-            .nav-logo-text { display: none; }
-            #sidebar { flex-direction: column; }
+            .nav-logo-text {
+                display: none;
+            }
+
+            #sidebar {
+                flex-direction: column;
+            }
         }
     </style>
 </head>
+
 <body>
 
     <!-- ══════════════ NAVBAR ══════════════ -->
@@ -481,13 +660,8 @@
         </a>
 
         <div id="search-wrapper">
-            <input
-                id="search-input"
-                type="search"
-                placeholder="🔍 搜尋工具（Gemini、翰林、雲端、Kahoot…）"
-                autocomplete="off"
-                spellcheck="false"
-            />
+            <input id="search-input" type="search" placeholder="🔍 搜尋工具（Gemini、翰林、雲端、Kahoot…）" autocomplete="off"
+                spellcheck="false" />
             <i class="fas fa-times" id="search-clear" title="清除搜尋"></i>
         </div>
 
@@ -511,13 +685,18 @@
                 </div>
                 <div class="links-grid">
                     <a href="https://gemini.google.com/" target="_blank" class="card-link" data-name="Gemini">Gemini</a>
-                    <a href="https://notebooklm.google.com/" target="_blank" class="card-link" data-name="Notebook LM">Notebook LM</a>
+                    <a href="https://notebooklm.google.com/" target="_blank" class="card-link"
+                        data-name="Notebook LM">Notebook LM</a>
                     <a href="https://chat.openai.com/" target="_blank" class="card-link" data-name="ChatGPT">ChatGPT</a>
                     <a href="https://claude.ai/" target="_blank" class="card-link" data-name="Claude">Claude</a>
-                    <a href="https://www.perplexity.ai/" target="_blank" class="card-link" data-name="Perplexity">Perplexity</a>
-                    <a href="https://makersuite.google.com/" target="_blank" class="card-link" data-name="AI Studio">AI Studio</a>
-                    <a href="https://stitch.withgoogle.com/" target="_blank" class="card-link" data-name="Stitch">Stitch</a>
-                    <a href="https://app.edcafe.ai/me/home" target="_blank" class="card-link" data-name="EDcafe">EDcafe</a>
+                    <a href="https://www.perplexity.ai/" target="_blank" class="card-link"
+                        data-name="Perplexity">Perplexity</a>
+                    <a href="https://makersuite.google.com/" target="_blank" class="card-link" data-name="AI Studio">AI
+                        Studio</a>
+                    <a href="https://stitch.withgoogle.com/" target="_blank" class="card-link"
+                        data-name="Stitch">Stitch</a>
+                    <a href="https://app.edcafe.ai/me/home" target="_blank" class="card-link"
+                        data-name="EDcafe">EDcafe</a>
                 </div>
             </div>
 
@@ -532,9 +711,12 @@
                     <a href="https://hanlindigi.hle.com.tw/" target="_blank" class="card-link" data-name="翰林平台">翰林平台</a>
                     <a href="https://mgz.hle.com.tw/" target="_blank" class="card-link" data-name="期刊大師">期刊大師</a>
                     <a href="https://testbank.hle.com.tw/" target="_blank" class="card-link" data-name="翰林出題">翰林出題</a>
-                    <a href="https://nanibox3.oneclass.com.tw/" target="_blank" class="card-link" data-name="南一資源">南一資源</a>
-                    <a href="https://nanipaper.oneclass.com.tw/" target="_blank" class="card-link" data-name="南一出題">南一出題</a>
-                    <a href="https://digitalmaster.knsh.com.tw/" target="_blank" class="card-link" data-name="康軒電子書">康軒電子書</a>
+                    <a href="https://nanibox3.oneclass.com.tw/" target="_blank" class="card-link"
+                        data-name="南一資源">南一資源</a>
+                    <a href="https://nanipaper.oneclass.com.tw/" target="_blank" class="card-link"
+                        data-name="南一出題">南一出題</a>
+                    <a href="https://digitalmaster.knsh.com.tw/" target="_blank" class="card-link"
+                        data-name="康軒電子書">康軒電子書</a>
                     <a href="https://quiz.knsh.com.tw/" target="_blank" class="card-link" data-name="康軒出題">康軒出題</a>
                 </div>
             </div>
@@ -546,14 +728,22 @@
                     <span class="card-title">放鬆區</span>
                 </div>
                 <div class="icon-links-grid">
-                    <a href="https://www.facebook.com/" target="_blank" class="icon-link" data-name="Facebook" data-tooltip="Facebook"><i class="fab fa-facebook-f"></i></a>
-                    <a href="https://www.instagram.com/" target="_blank" class="icon-link" data-name="Instagram" data-tooltip="Instagram"><i class="fab fa-instagram"></i></a>
-                    <a href="https://www.threads.net/" target="_blank" class="icon-link" data-name="Threads" data-tooltip="Threads"><i class="fab fa-threads"></i></a>
-                    <a href="https://www.youtube.com/" target="_blank" class="icon-link" data-name="YouTube" data-tooltip="YouTube"><i class="fab fa-youtube"></i></a>
-                    <a href="https://94580.net/" target="_blank" class="icon-link" data-name="94580" data-tooltip="94580"><i class="fas fa-gamepad"></i></a>
-                    <a href="https://shopee.tw/" target="_blank" class="icon-link" data-name="蝦皮購物" data-tooltip="蝦皮購物"><i class="fas fa-bag-shopping"></i></a>
-                    <a href="https://www.momoshop.com.tw/" target="_blank" class="icon-link" data-name="Momo購物" data-tooltip="Momo購物"><i class="fas fa-cart-shopping"></i></a>
-                    <a href="https://24h.pchome.com.tw/" target="_blank" class="icon-link" data-name="PChome 24h" data-tooltip="PChome 24h"><i class="fas fa-truck-fast"></i></a>
+                    <a href="https://www.facebook.com/" target="_blank" class="icon-link" data-name="Facebook"
+                        data-tooltip="Facebook"><i class="fab fa-facebook-f"></i></a>
+                    <a href="https://www.instagram.com/" target="_blank" class="icon-link" data-name="Instagram"
+                        data-tooltip="Instagram"><i class="fab fa-instagram"></i></a>
+                    <a href="https://www.threads.net/" target="_blank" class="icon-link" data-name="Threads"
+                        data-tooltip="Threads"><i class="fab fa-threads"></i></a>
+                    <a href="https://www.youtube.com/" target="_blank" class="icon-link" data-name="YouTube"
+                        data-tooltip="YouTube"><i class="fab fa-youtube"></i></a>
+                    <a href="https://94580.net/" target="_blank" class="icon-link" data-name="94580"
+                        data-tooltip="94580"><i class="fas fa-gamepad"></i></a>
+                    <a href="https://shopee.tw/" target="_blank" class="icon-link" data-name="蝦皮購物"
+                        data-tooltip="蝦皮購物"><i class="fas fa-bag-shopping"></i></a>
+                    <a href="https://www.momoshop.com.tw/" target="_blank" class="icon-link" data-name="Momo購物"
+                        data-tooltip="Momo購物"><i class="fas fa-cart-shopping"></i></a>
+                    <a href="https://24h.pchome.com.tw/" target="_blank" class="icon-link" data-name="PChome 24h"
+                        data-tooltip="PChome 24h"><i class="fas fa-truck-fast"></i></a>
                 </div>
             </div>
 
@@ -565,14 +755,18 @@
                 </div>
                 <div class="links-grid">
                     <a href="https://www.set.edu.tw/" target="_blank" class="card-link" data-name="特通網">特通網</a>
-                    <a href="https://eschool.hlc.edu.tw/" target="_blank" class="card-link" data-name="全誼校務系統">全誼校務系統</a>
+                    <a href="https://eschool.hlc.edu.tw/" target="_blank" class="card-link"
+                        data-name="全誼校務系統">全誼校務系統</a>
                     <a href="https://news.hlc.edu.tw/" target="_blank" class="card-link" data-name="花蓮處務公告">花蓮處務公告</a>
                     <a href="https://srec.hlc.edu.tw/" target="_blank" class="card-link" data-name="特教資源網">特教資源網</a>
                     <a href="https://special.moe.gov.tw/" target="_blank" class="card-link" data-name="特教研習">特教研習</a>
                     <a href="https://www1.inservice.edu.tw/" target="_blank" class="card-link" data-name="全國研習">全國研習</a>
-                    <a href="https://drive.google.com/drive/folders/15F9f5dW6PHYode_w1opdEKLYkoNKmnMe" target="_blank" class="card-link" data-name="鑑定表單">鑑定表單</a>
-                    <a href="https://www.irasutoya.com/" target="_blank" class="card-link" data-name="Irasutoya">Irasutoya</a>
-                    <a href="https://www.flaticon.com/" target="_blank" class="card-link" data-name="Flaticon">Flaticon</a>
+                    <a href="https://drive.google.com/drive/folders/15F9f5dW6PHYode_w1opdEKLYkoNKmnMe" target="_blank"
+                        class="card-link" data-name="鑑定表單">鑑定表單</a>
+                    <a href="https://www.irasutoya.com/" target="_blank" class="card-link"
+                        data-name="Irasutoya">Irasutoya</a>
+                    <a href="https://www.flaticon.com/" target="_blank" class="card-link"
+                        data-name="Flaticon">Flaticon</a>
                     <a href="https://chojugiga.com/" target="_blank" class="card-link" data-name="鳥獸戲畫">鳥獸戲畫</a>
                 </div>
             </div>
@@ -584,23 +778,32 @@
                     <span class="card-title">互動教學工具</span>
                 </div>
                 <div class="links-grid">
-                    <a href="https://classroom.google.com/" target="_blank" class="card-link" data-name="Classroom">Classroom</a>
+                    <a href="https://classroom.google.com/" target="_blank" class="card-link"
+                        data-name="Classroom">Classroom</a>
                     <a href="https://www.learnmode.net/" target="_blank" class="card-link" data-name="學習吧">學習吧</a>
-                    <a href="https://teach.classdojo.com/" target="_blank" class="card-link" data-name="ClassDojo">ClassDojo</a>
-                    <a href="https://sites.google.com/view/specialchu/home" target="_blank" class="card-link" data-name="線上學習區">線上學習區</a>
+                    <a href="https://teach.classdojo.com/" target="_blank" class="card-link"
+                        data-name="ClassDojo">ClassDojo</a>
+                    <a href="https://sites.google.com/view/specialchu/home" target="_blank" class="card-link"
+                        data-name="線上學習區">線上學習區</a>
                     <a href="https://wordwall.net/" target="_blank" class="card-link" data-name="Wordwall">Wordwall</a>
                     <a href="https://quizizz.com/" target="_blank" class="card-link" data-name="Quizizz">Quizizz</a>
-                    <a href="https://dashboard.blooket.com/" target="_blank" class="card-link" data-name="Blooket">Blooket</a>
+                    <a href="https://dashboard.blooket.com/" target="_blank" class="card-link"
+                        data-name="Blooket">Blooket</a>
                     <a href="https://www.gimkit.com/" target="_blank" class="card-link" data-name="Gimkit">Gimkit</a>
                     <a href="https://create.kahoot.it/" target="_blank" class="card-link" data-name="Kahoot">Kahoot</a>
-                    <a href="https://toytheater.com/" target="_blank" class="card-link" data-name="Toy Theater">Toy Theater</a>
+                    <a href="https://toytheater.com/" target="_blank" class="card-link" data-name="Toy Theater">Toy
+                        Theater</a>
                     <a href="https://emath.math.ncu.edu.tw/" target="_blank" class="card-link" data-name="子由數學">子由數學</a>
-                    <a href="https://subjects.modernedu.hk/" target="_blank" class="card-link" data-name="數學 App">數學 App</a>
-                    <a href="https://polypad.amplify.com/" target="_blank" class="card-link" data-name="Mathigon">Mathigon</a>
+                    <a href="https://subjects.modernedu.hk/" target="_blank" class="card-link" data-name="數學 App">數學
+                        App</a>
+                    <a href="https://polypad.amplify.com/" target="_blank" class="card-link"
+                        data-name="Mathigon">Mathigon</a>
                     <a href="https://www.geogebra.org/" target="_blank" class="card-link" data-name="繪圖計算機">繪圖計算機</a>
-                    <a href="https://aaclearningbackend.azurewebsites.net/" target="_blank" class="card-link" data-name="AAC">AAC</a>
+                    <a href="https://aaclearningbackend.azurewebsites.net/" target="_blank" class="card-link"
+                        data-name="AAC">AAC</a>
                     <a href="https://soundoftext.com/" target="_blank" class="card-link" data-name="文字轉語音">文字轉語音</a>
-                    <a href="https://naozhong.tw/設置計時器-5-分鐘/" target="_blank" class="card-link" data-name="線上計時器">線上計時器</a>
+                    <a href="https://naozhong.tw/設置計時器-5-分鐘/" target="_blank" class="card-link"
+                        data-name="線上計時器">線上計時器</a>
                 </div>
             </div>
 
@@ -611,19 +814,32 @@
                     <span class="card-title">工具區</span>
                 </div>
                 <div class="icon-links-grid">
-                    <a href="https://drive.google.com/" target="_blank" class="icon-link" data-name="Google 雲端" data-tooltip="Google 雲端"><i class="fas fa-cloud"></i></a>
-                    <a href="https://docs.google.com/" target="_blank" class="icon-link" data-name="Google 文件" data-tooltip="Google 文件"><i class="fas fa-file-lines"></i></a>
-                    <a href="https://slides.google.com/" target="_blank" class="icon-link" data-name="Google 簡報" data-tooltip="Google 簡報"><i class="fas fa-display"></i></a>
-                    <a href="https://sheets.google.com/" target="_blank" class="icon-link" data-name="Google 試算表" data-tooltip="Google 試算表"><i class="fas fa-table"></i></a>
-                    <a href="https://forms.google.com/" target="_blank" class="icon-link" data-name="Google 表單" data-tooltip="Google 表單"><i class="fas fa-rectangle-list"></i></a>
-                    <a href="https://mail.google.com/" target="_blank" class="icon-link" data-name="Gmail" data-tooltip="Gmail"><i class="fas fa-envelope"></i></a>
-                    <a href="https://calendar.google.com/" target="_blank" class="icon-link" data-name="Google 日曆" data-tooltip="Google 日曆"><i class="fas fa-calendar-days"></i></a>
-                    <a href="https://keep.google.com/" target="_blank" class="icon-link" data-name="Keep" data-tooltip="Keep"><i class="fas fa-lightbulb"></i></a>
-                    <a href="https://translate.google.com/" target="_blank" class="icon-link" data-name="Google 翻譯" data-tooltip="Google 翻譯"><i class="fas fa-language"></i></a>
-                    <a href="https://login.microsoftonline.com/" target="_blank" class="icon-link" data-name="Office 365" data-tooltip="Office 365"><i class="fab fa-microsoft"></i></a>
-                    <a href="https://www.canva.com/zh_tw/" target="_blank" class="icon-link" data-name="Canva" data-tooltip="Canva"><i class="fas fa-palette"></i></a>
-                    <a href="https://www.notion.so/" target="_blank" class="icon-link" data-name="Notion" data-tooltip="Notion"><i class="fas fa-book-open"></i></a>
-                    <a href="https://github.com/chuoneone?tab=repositories" target="_blank" class="icon-link" data-name="GitHub" data-tooltip="GitHub"><i class="fab fa-github"></i></a>
+                    <a href="https://drive.google.com/" target="_blank" class="icon-link" data-name="Google 雲端"
+                        data-tooltip="Google 雲端"><i class="fas fa-cloud"></i></a>
+                    <a href="https://docs.google.com/" target="_blank" class="icon-link" data-name="Google 文件"
+                        data-tooltip="Google 文件"><i class="fas fa-file-lines"></i></a>
+                    <a href="https://slides.google.com/" target="_blank" class="icon-link" data-name="Google 簡報"
+                        data-tooltip="Google 簡報"><i class="fas fa-display"></i></a>
+                    <a href="https://sheets.google.com/" target="_blank" class="icon-link" data-name="Google 試算表"
+                        data-tooltip="Google 試算表"><i class="fas fa-table"></i></a>
+                    <a href="https://forms.google.com/" target="_blank" class="icon-link" data-name="Google 表單"
+                        data-tooltip="Google 表單"><i class="fas fa-rectangle-list"></i></a>
+                    <a href="https://mail.google.com/" target="_blank" class="icon-link" data-name="Gmail"
+                        data-tooltip="Gmail"><i class="fas fa-envelope"></i></a>
+                    <a href="https://calendar.google.com/" target="_blank" class="icon-link" data-name="Google 日曆"
+                        data-tooltip="Google 日曆"><i class="fas fa-calendar-days"></i></a>
+                    <a href="https://keep.google.com/" target="_blank" class="icon-link" data-name="Keep"
+                        data-tooltip="Keep"><i class="fas fa-lightbulb"></i></a>
+                    <a href="https://translate.google.com/" target="_blank" class="icon-link" data-name="Google 翻譯"
+                        data-tooltip="Google 翻譯"><i class="fas fa-language"></i></a>
+                    <a href="https://login.microsoftonline.com/" target="_blank" class="icon-link"
+                        data-name="Office 365" data-tooltip="Office 365"><i class="fab fa-microsoft"></i></a>
+                    <a href="https://www.canva.com/zh_tw/" target="_blank" class="icon-link" data-name="Canva"
+                        data-tooltip="Canva"><i class="fas fa-palette"></i></a>
+                    <a href="https://www.notion.so/" target="_blank" class="icon-link" data-name="Notion"
+                        data-tooltip="Notion"><i class="fas fa-book-open"></i></a>
+                    <a href="https://github.com/chuoneone?tab=repositories" target="_blank" class="icon-link"
+                        data-name="GitHub" data-tooltip="GitHub"><i class="fab fa-github"></i></a>
                 </div>
             </div>
 
@@ -640,11 +856,11 @@
             <!-- Dog slideshow -->
             <div id="dog-panel">
                 <img src="dog1.png" class="dog-slide opacity-100" alt="愛犬 1" />
-                <img src="dog2.png" class="dog-slide opacity-0"   alt="愛犬 2" />
-                <img src="dog3.png" class="dog-slide opacity-0"   alt="愛犬 3" />
-                <img src="dog4.png" class="dog-slide opacity-0"   alt="愛犬 4" />
-                <img src="dog5.png" class="dog-slide opacity-0"   alt="愛犬 5" />
-                <img src="dog6.png" class="dog-slide opacity-0"   alt="愛犬 6" />
+                <img src="dog2.png" class="dog-slide opacity-0" alt="愛犬 2" />
+                <img src="dog3.png" class="dog-slide opacity-0" alt="愛犬 3" />
+                <img src="dog4.png" class="dog-slide opacity-0" alt="愛犬 4" />
+                <img src="dog5.png" class="dog-slide opacity-0" alt="愛犬 5" />
+                <img src="dog6.png" class="dog-slide opacity-0" alt="愛犬 6" />
                 <div class="dog-gradient"></div>
                 <div class="dog-caption">
                     <h3>My Lovely Dogs</h3>
@@ -652,27 +868,22 @@
                 </div>
             </div>
 
-            <!-- Google Keep -->
-            <div id="keep-panel">
-                <div class="keep-header">
-                    <i class="fas fa-lightbulb"></i>
-                    <span>Google Keep 待辦</span>
-                    <a href="https://keep.google.com/" target="_blank" title="在新視窗開啟">
-                        <i class="fas fa-external-link-alt"></i> 開啟
-                    </a>
+            <!-- Todo List -->
+            <div id="todo-panel">
+                <div id="todo-loader"><i class="fas fa-circle-notch fa-spin"></i></div>
+                <div class="todo-header">
+                    <i class="fas fa-check-square"></i>
+                    <span>待辦事項</span>
+                    <span id="todo-status" class="todo-sync-status">雲端同步中...</span>
                 </div>
-                <iframe
-                    id="keep-frame"
-                    src="https://keep.google.com/"
-                    title="Google Keep"
-                    allow="same-origin"
-                    sandbox="allow-same-origin allow-scripts allow-forms allow-popups"
-                ></iframe>
-                <div id="keep-fallback">
-                    <p>Google Keep 限制了頁面內嵌顯示。<br>請點下方按鈕直接開啟。</p>
-                    <a href="https://keep.google.com/" target="_blank">
-                        <i class="fas fa-lightbulb"></i> 開啟 Google Keep
-                    </a>
+                <div class="todo-body">
+                    <div class="todo-input-group">
+                        <input type="text" id="todo-input" placeholder="新增事項..." autocomplete="off">
+                        <button id="todo-add-btn" title="新增"><i class="fas fa-plus"></i></button>
+                    </div>
+                    <ul id="todo-list">
+                        <!-- Todo items will appear here -->
+                    </ul>
                 </div>
             </div>
 
@@ -685,136 +896,208 @@
     </footer>
 
     <script>
-    document.addEventListener('DOMContentLoaded', () => {
+        document.addEventListener('DOMContentLoaded', () => {
 
-        /* ─── Dog Slideshow ─── */
-        (function () {
-            const slides = document.querySelectorAll('#dog-panel .dog-slide');
-            if (!slides.length) return;
-            let cur = 0;
-            setInterval(() => {
-                slides[cur].classList.remove('opacity-100');
-                slides[cur].classList.add('opacity-0');
-                cur = (cur + 1) % slides.length;
-                slides[cur].classList.remove('opacity-0');
-                slides[cur].classList.add('opacity-100');
-            }, 4000);
-        })();
+            /* ─── Dog Slideshow ─── */
+            (function () {
+                const slides = document.querySelectorAll('#dog-panel .dog-slide');
+                if (!slides.length) return;
+                let cur = 0;
+                setInterval(() => {
+                    slides[cur].classList.remove('opacity-100');
+                    slides[cur].classList.add('opacity-0');
+                    cur = (cur + 1) % slides.length;
+                    slides[cur].classList.remove('opacity-0');
+                    slides[cur].classList.add('opacity-100');
+                }, 4000);
+            })();
 
-        /* ─── Countdown ─── */
-        (function () {
-            const el = document.getElementById('countdown-text');
-            function tick() {
-                const target = new Date('2026-07-01');
-                const diff   = Math.ceil((target - new Date()) / 86400000);
-                if      (diff > 0) el.textContent = `暑假倒數 ${diff} 天`;
-                else if (diff === 0) el.textContent = '暑假就是今天！🎉';
-                else                 el.textContent = '假期愉快！';
-            }
-            tick();
-            setInterval(tick, 60000);
-        })();
-
-        /* ─── Google Keep iframe fallback ─── */
-        (function () {
-            const frame    = document.getElementById('keep-frame');
-            const fallback = document.getElementById('keep-fallback');
-            // Detect blocked iframe: if contentDocument is null after load → blocked
-            frame.addEventListener('load', () => {
-                try {
-                    // Cross-origin success means it loaded (unlikely for Keep)
-                    const doc = frame.contentDocument || frame.contentWindow.document;
-                    if (doc && doc.body && doc.body.innerHTML === '') {
-                        throw new Error('empty');
-                    }
-                } catch (e) {
-                    // Blocked by X-Frame-Options → show fallback
-                    frame.style.display = 'none';
-                    fallback.style.display = 'block';
+            /* ─── Countdown ─── */
+            (function () {
+                const el = document.getElementById('countdown-text');
+                function tick() {
+                    const target = new Date('2026-07-01');
+                    const diff = Math.ceil((target - new Date()) / 86400000);
+                    if (diff > 0) el.textContent = `暑假倒數 ${diff} 天`;
+                    else if (diff === 0) el.textContent = '暑假就是今天！🎉';
+                    else el.textContent = '假期愉快！';
                 }
-            });
-            // Extra safety: if load never fires in 6 s, assume blocked
-            setTimeout(() => {
-                if (fallback.style.display === 'block') return;
-                try {
-                    const doc = frame.contentDocument || frame.contentWindow.document;
-                    if (!doc || !doc.body || doc.body.innerHTML === '') {
-                        frame.style.display = 'none';
-                        fallback.style.display = 'block';
+                tick();
+                setInterval(tick, 60000);
+            })();
+
+            /* ─── Todo List Logic (Cloud Sync) ─── */
+            (function () {
+                const GAS_URL = 'https://script.google.com/macros/s/AKfycbzuVbXxkzi3PYMbjPljjHy6L491byFldnUIGMzY46qknMTg2iHoedSC_i4OWF8dOz01/exec'; // <--- 放入你部署後的 URL
+
+                const input = document.getElementById('todo-input');
+                const addBtn = document.getElementById('todo-add-btn');
+                const todoList = document.getElementById('todo-list');
+                const statusEl = document.getElementById('todo-status');
+                const loader = document.getElementById('todo-loader');
+
+                let todos = JSON.parse(localStorage.getItem('chuone-todos')) || [];
+                let isSyncing = false;
+
+                async function saveTodos() {
+                    localStorage.setItem('chuone-todos', JSON.stringify(todos));
+                    if (!GAS_URL || GAS_URL.includes('請替換')) return;
+
+                    statusEl.textContent = '正在儲存...';
+                    try {
+                        await fetch(GAS_URL, {
+                            method: 'POST',
+                            mode: 'no-cors', // GAS Web App POST 限制
+                            body: JSON.stringify(todos),
+                            headers: { 'Content-Type': 'application/json' }
+                        });
+                        statusEl.textContent = '已同步雲端';
+                    } catch (e) {
+                        statusEl.textContent = '同步失敗(僅本機紀錄)';
+                        console.error('GAS Save Error:', e);
                     }
-                } catch (e) {
-                    frame.style.display = 'none';
-                    fallback.style.display = 'block';
                 }
-            }, 6000);
-        })();
 
-        /* ─── Search ─── */
-        (function () {
-            const input   = document.getElementById('search-input');
-            const clear   = document.getElementById('search-clear');
-            const cards   = document.querySelectorAll('.resource-card');
-            const empty   = document.getElementById('search-empty');
+                async function loadFromCloud() {
+                    if (!GAS_URL || GAS_URL.includes('請替換')) {
+                        statusEl.textContent = '本機模式';
+                        return;
+                    }
 
-            function runSearch() {
-                const q = input.value.trim().toLowerCase();
-                clear.style.display = q ? 'block' : 'none';
-                let anyCard = false;
+                    loader.style.display = 'flex';
+                    statusEl.textContent = '雲端抓取中...';
 
-                cards.forEach(card => {
-                    if (card.id === 'search-empty') return;
-                    const links = card.querySelectorAll('.card-link');
-                    let anyLink = false;
-
-                    links.forEach(link => {
-                        const name = link.getAttribute('data-name') || '';
-                        const isIconLink = link.classList.contains('icon-link');
-                        if (!q || name.toLowerCase().includes(q)) {
-                            link.classList.remove('search-hidden');
-                            if (!isIconLink) {
-                                if (q) {
-                                    const i  = name.toLowerCase().indexOf(q);
-                                    link.innerHTML =
-                                        name.slice(0, i) +
-                                        '<mark>' + name.slice(i, i + q.length) + '</mark>' +
-                                        name.slice(i + q.length);
-                                } else {
-                                    link.textContent = name;
-                                }
-                            }
-                            anyLink = true;
-                        } else {
-                            link.classList.add('search-hidden');
-                            if (!isIconLink) link.textContent = name;
+                    try {
+                        const res = await fetch(GAS_URL);
+                        const cloudData = await res.json();
+                        if (Array.isArray(cloudData)) {
+                            todos = cloudData;
+                            localStorage.setItem('chuone-todos', JSON.stringify(todos));
+                            renderTodos();
+                            statusEl.textContent = '已連結雲端';
                         }
-                    });
+                    } catch (e) {
+                        statusEl.textContent = '雲端抓取失敗';
+                        console.error('GAS Load Error:', e);
+                    } finally {
+                        loader.style.display = 'none';
+                    }
+                }
 
-                    if (anyLink) { card.classList.remove('search-hidden'); anyCard = true; }
-                    else           card.classList.add('search-hidden');
+                function renderTodos() {
+                    todoList.innerHTML = '';
+                    todos.forEach((todo, index) => {
+                        const li = document.createElement('li');
+                        li.className = `todo-item ${todo.completed ? 'completed' : ''}`;
+                        li.innerHTML = `
+                        <input type="checkbox" class="todo-checkbox" ${todo.completed ? 'checked' : ''}>
+                        <span class="todo-text">${todo.text}</span>
+                        <i class="fas fa-trash todo-delete-btn" title="刪除"></i>
+                    `;
+
+                        li.querySelector('.todo-checkbox').addEventListener('change', () => {
+                            todos[index].completed = !todos[index].completed;
+                            saveTodos();
+                            renderTodos();
+                        });
+
+                        li.querySelector('.todo-delete-btn').addEventListener('click', () => {
+                            todos.splice(index, 1);
+                            saveTodos();
+                            renderTodos();
+                        });
+
+                        todoList.appendChild(li);
+                    });
+                }
+
+                function addTodo() {
+                    const text = input.value.trim();
+                    if (text) {
+                        todos.push({ text, completed: false });
+                        input.value = '';
+                        renderTodos();
+                        saveTodos();
+                    }
+                }
+
+                addBtn.addEventListener('click', addTodo);
+                input.addEventListener('keypress', (e) => {
+                    if (e.key === 'Enter') addTodo();
                 });
 
-                empty.style.display = (q && !anyCard) ? 'block' : 'none';
-            }
+                // 先顯示本機資料(快)，再嘗試同步雲端
+                renderTodos();
+                loadFromCloud();
+            })();
 
-            input.addEventListener('input', runSearch);
+            /* ─── Search ─── */
+            (function () {
+                const input = document.getElementById('search-input');
+                const clear = document.getElementById('search-clear');
+                const cards = document.querySelectorAll('.resource-card');
+                const empty = document.getElementById('search-empty');
 
-            // Enter → open first visible link
-            input.addEventListener('keydown', e => {
-                if (e.key === 'Enter') {
-                    const first = document.querySelector('.card-link:not(.search-hidden)');
-                    if (first) first.click();
+                function runSearch() {
+                    const q = input.value.trim().toLowerCase();
+                    clear.style.display = q ? 'block' : 'none';
+                    let anyCard = false;
+
+                    cards.forEach(card => {
+                        if (card.id === 'search-empty') return;
+                        const links = card.querySelectorAll('.card-link');
+                        let anyLink = false;
+
+                        links.forEach(link => {
+                            const name = link.getAttribute('data-name') || '';
+                            const isIconLink = link.classList.contains('icon-link');
+                            if (!q || name.toLowerCase().includes(q)) {
+                                link.classList.remove('search-hidden');
+                                if (!isIconLink) {
+                                    if (q) {
+                                        const i = name.toLowerCase().indexOf(q);
+                                        link.innerHTML =
+                                            name.slice(0, i) +
+                                            '<mark>' + name.slice(i, i + q.length) + '</mark>' +
+                                            name.slice(i + q.length);
+                                    } else {
+                                        link.textContent = name;
+                                    }
+                                }
+                                anyLink = true;
+                            } else {
+                                link.classList.add('search-hidden');
+                                if (!isIconLink) link.textContent = name;
+                            }
+                        });
+
+                        if (anyLink) { card.classList.remove('search-hidden'); anyCard = true; }
+                        else card.classList.add('search-hidden');
+                    });
+
+                    empty.style.display = (q && !anyCard) ? 'block' : 'none';
                 }
-            });
 
-            // Clear button
-            clear.addEventListener('click', () => {
-                input.value = '';
-                input.focus();
-                runSearch();
-            });
-        })();
+                input.addEventListener('input', runSearch);
 
-    });
+                // Enter → open first visible link
+                input.addEventListener('keydown', e => {
+                    if (e.key === 'Enter') {
+                        const first = document.querySelector('.card-link:not(.search-hidden)');
+                        if (first) first.click();
+                    }
+                });
+
+                // Clear button
+                clear.addEventListener('click', () => {
+                    input.value = '';
+                    input.focus();
+                    runSearch();
+                });
+            })();
+
+        });
     </script>
 </body>
+
 </html>
