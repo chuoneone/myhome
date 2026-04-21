@@ -54,13 +54,11 @@
            NAVBAR
         ════════════════════════ */
         #main-nav {
-            position: sticky;
-            top: 0;
             z-index: 50;
             background: #B3DEE5;
             border-bottom: 1px solid rgba(255, 255, 255, 0.55);
             box-shadow: 0 2px 10px -3px rgba(49, 82, 91, 0.1);
-            padding: 10px 20px;
+            padding: 10px 40px;
             display: flex;
             align-items: center;
             gap: 14px;
@@ -103,54 +101,9 @@
             color: white;
         }
 
-        /* Search bar */
-        #search-wrapper {
-            flex: 1;
-            position: relative;
-            max-width: 580px;
-        }
-
-        #search-input {
-            width: 100%;
-            padding: 8px 38px 8px 16px;
-            border: 1.5px solid rgba(49, 82, 91, 0.2);
-            border-radius: 30px;
-            font-size: 0.88rem;
-            font-family: inherit;
-            color: #31525B;
-            background: rgba(255, 255, 255, 0.72);
-            outline: none;
-            transition: border-color 0.2s, box-shadow 0.2s, background 0.2s;
-        }
-
-        #search-input:focus {
-            border-color: #FFA101;
-            background: white;
-            box-shadow: 0 0 0 3px rgba(255, 161, 1, 0.18);
-        }
-
-        #search-input::placeholder {
-            color: #7AAAB3;
-        }
-
-        #search-clear {
-            position: absolute;
-            right: 13px;
-            top: 50%;
-            transform: translateY(-50%);
-            color: #9CA3AF;
-            cursor: pointer;
-            font-size: 0.8rem;
-            display: none;
-            transition: color 0.2s;
-        }
-
-        #search-clear:hover {
-            color: #FFA101;
-        }
-
         /* Countdown */
         #nav-countdown {
+            margin-left: auto;
             flex-shrink: 0;
             background: #31525B;
             color: white;
@@ -170,21 +123,21 @@
         ════════════════════════ */
         #page-body {
             display: grid;
-            grid-template-columns: 1fr 300px;
-            gap: 18px;
-            max-width: 1500px;
+            grid-template-columns: 1fr 320px;
+            gap: 30px;
+            max-width: 1440px;
             margin: 0 auto;
-            padding: 20px 20px 48px;
+            padding: 30px 40px 60px;
             align-items: start;
         }
 
         /* ── Sidebar (right) ── */
         #sidebar {
             position: sticky;
-            top: 70px;
+            top: 20px;
             display: flex;
             flex-direction: column;
-            gap: 14px;
+            gap: 20px;
         }
 
         /* Dog slideshow */
@@ -254,6 +207,7 @@
             position: relative;
             transition: box-shadow 0.3s;
         }
+
         #todo-panel:hover {
             box-shadow: 0 12px 30px -8px rgba(49, 82, 91, 0.2);
         }
@@ -268,7 +222,11 @@
             z-index: 20;
             backdrop-filter: blur(2px);
         }
-        #todo-loader i { color: #FFA101; font-size: 1.8rem; }
+
+        #todo-loader i {
+            color: #FFA101;
+            font-size: 1.8rem;
+        }
 
         .todo-header {
             display: flex;
@@ -278,8 +236,18 @@
             background: linear-gradient(135deg, #31525B 0%, #4A707A 100%);
             color: white;
         }
-        .todo-header i { font-size: 1rem; color: #FFA101; }
-        .todo-header span { font-weight: 800; font-size: 0.95rem; letter-spacing: 0.03em; }
+
+        .todo-header i {
+            font-size: 1rem;
+            color: #FFA101;
+        }
+
+        .todo-header span {
+            font-weight: 800;
+            font-size: 0.95rem;
+            letter-spacing: 0.03em;
+        }
+
         .todo-sync-status {
             margin-left: auto;
             font-size: 0.65rem;
@@ -294,11 +262,13 @@
             flex-direction: column;
             gap: 18px;
         }
+
         .todo-input-group {
             display: flex;
             gap: 10px;
             position: relative;
         }
+
         #todo-input {
             flex: 1;
             padding: 10px 14px;
@@ -311,11 +281,13 @@
             outline: none;
             transition: all 0.25s ease;
         }
+
         #todo-input:focus {
             border-color: #B3DEE5;
             background: white;
             box-shadow: 0 0 0 4px rgba(179, 222, 229, 0.2);
         }
+
         #todo-add-btn {
             background: #FFA101;
             color: white;
@@ -330,11 +302,15 @@
             transition: all 0.25s cubic-bezier(0.4, 0, 0.2, 1);
             box-shadow: 0 4px 12px -2px rgba(255, 161, 1, 0.3);
         }
+
         #todo-add-btn:hover {
             transform: scale(1.05) translateY(-2px);
             box-shadow: 0 6px 15px -2px rgba(255, 161, 1, 0.45);
         }
-        #todo-add-btn:active { transform: scale(0.95); }
+
+        #todo-add-btn:active {
+            transform: scale(0.95);
+        }
 
         #todo-list {
             list-style: none;
@@ -345,8 +321,15 @@
             overflow-y: auto;
             padding-right: 6px;
         }
-        #todo-list::-webkit-scrollbar { width: 5px; }
-        #todo-list::-webkit-scrollbar-thumb { background: #E9EEF0; border-radius: 10px; }
+
+        #todo-list::-webkit-scrollbar {
+            width: 5px;
+        }
+
+        #todo-list::-webkit-scrollbar-thumb {
+            background: #E9EEF0;
+            border-radius: 10px;
+        }
 
         .todo-item {
             display: flex;
@@ -359,10 +342,19 @@
             transition: all 0.2s ease;
             animation: slideIn 0.3s ease-out;
         }
+
         @keyframes slideIn {
-            from { opacity: 0; transform: translateX(10px); }
-            to { opacity: 1; transform: translateX(0); }
+            from {
+                opacity: 0;
+                transform: translateX(10px);
+            }
+
+            to {
+                opacity: 1;
+                transform: translateX(0);
+            }
         }
+
         .todo-item:hover {
             border-color: #B3DEE5;
             box-shadow: 0 4px 12px rgba(49, 82, 91, 0.05);
@@ -379,6 +371,7 @@
             flex-shrink: 0;
             cursor: pointer;
         }
+
         .todo-checkbox {
             appearance: none;
             width: 20px;
@@ -390,10 +383,12 @@
             transition: all 0.2s cubic-bezier(0.4, 0, 0.2, 1);
             background: white;
         }
+
         .todo-checkbox:checked {
             background: #10B981;
             border-color: #10B981;
         }
+
         .todo-checkbox::after {
             content: "\f00c";
             font-family: "Font Awesome 6 Free";
@@ -406,7 +401,10 @@
             transform: translate(-50%, -50%) scale(0);
             transition: transform 0.2s cubic-bezier(0.175, 0.885, 0.32, 1.275);
         }
-        .todo-checkbox:checked::after { transform: translate(-50%, -50%) scale(1); }
+
+        .todo-checkbox:checked::after {
+            transform: translate(-50%, -50%) scale(1);
+        }
 
         .todo-text {
             flex: 1;
@@ -416,16 +414,18 @@
             font-weight: 500;
             transition: all 0.3s ease;
         }
+
         .todo-item.completed {
             background: #F9FAFB;
             border-color: transparent;
         }
+
         .todo-item.completed .todo-text {
             text-decoration: line-through;
             opacity: 0.45;
             color: #6B7280;
         }
-        
+
         .todo-delete-btn {
             color: #D1D5DB;
             cursor: pointer;
@@ -435,7 +435,11 @@
             transition: all 0.2s;
             opacity: 0;
         }
-        .todo-item:hover .todo-delete-btn { opacity: 1; }
+
+        .todo-item:hover .todo-delete-btn {
+            opacity: 1;
+        }
+
         .todo-delete-btn:hover {
             color: #EF4444;
             background: #FEE2E2;
@@ -525,7 +529,7 @@
         #tools-grid {
             display: grid;
             grid-template-columns: repeat(auto-fill, minmax(240px, 1fr));
-            gap: 14px;
+            gap: 20px;
         }
 
         .resource-card {
@@ -533,7 +537,7 @@
             border: 1px solid #E9EEF0;
             border-bottom: 3px solid #E9EEF0;
             border-radius: 14px;
-            padding: 16px;
+            padding: 20px;
             transition: transform 0.3s ease, box-shadow 0.3s ease, border-color 0.3s ease;
             box-shadow: 0 2px 6px rgba(0, 0, 0, 0.025);
         }
@@ -543,10 +547,6 @@
             box-shadow: 0 10px 28px -8px rgba(49, 82, 91, 0.12);
             border-color: #B3DEE5;
             border-bottom-color: #FFA101;
-        }
-
-        .resource-card.search-hidden {
-            display: none;
         }
 
         .card-header {
@@ -581,17 +581,19 @@
         .links-grid {
             display: grid;
             grid-template-columns: 1fr 1fr;
-            gap: 7px;
+            gap: 10px 8px;
         }
 
         .card-link {
-            display: block;
+            display: flex;
+            align-items: center;
+            justify-content: center;
+            gap: 6px;
             padding: 7px 8px;
             background: #F3F6F7;
             border-radius: 8px;
             font-weight: 600;
             font-size: 0.84rem;
-            text-align: center;
             color: #31525B;
             text-decoration: none;
             white-space: nowrap;
@@ -601,6 +603,11 @@
             border: 1px solid transparent;
         }
 
+        .card-link i {
+            font-size: 0.8rem;
+            opacity: 0.8;
+        }
+
         .card-link:hover {
             background: #FFA101;
             color: white;
@@ -608,22 +615,11 @@
             transform: translateY(-1px);
         }
 
-        .card-link.search-hidden {
-            display: none;
-        }
-
-        .card-link mark {
-            background: #FFA101;
-            color: white;
-            border-radius: 2px;
-            padding: 0 2px;
-        }
-
         /* Icon-only grid (works area) */
         .icon-links-grid {
             display: grid;
             grid-template-columns: repeat(4, 1fr);
-            gap: 8px;
+            gap: 10px;
         }
 
         .icon-link {
@@ -646,10 +642,6 @@
             color: white;
             transform: translateY(-2px);
             box-shadow: 0 4px 10px -2px rgba(255, 161, 1, 0.38);
-        }
-
-        .icon-link.search-hidden {
-            display: none;
         }
 
         /* Custom Tooltip */
@@ -700,25 +692,6 @@
         .icon-link:hover::after {
             opacity: 1;
             visibility: visible;
-        }
-
-        /* Empty search state */
-        #search-empty {
-            display: none;
-            grid-column: 1 / -1;
-            text-align: center;
-            padding: 52px 0;
-            color: #A0B4B8;
-        }
-
-        #search-empty i {
-            font-size: 2rem;
-            margin-bottom: 10px;
-            display: block;
-        }
-
-        #search-empty p {
-            font-size: 0.9rem;
         }
 
         /* ── Footer ── */
@@ -805,12 +778,6 @@
             <span class="nav-logo-text">Chuone Toolbox</span>
         </a>
 
-        <div id="search-wrapper">
-            <input id="search-input" type="search" placeholder="🔍 搜尋工具（Gemini、翰林、雲端、Kahoot…）" autocomplete="off"
-                spellcheck="false" />
-            <i class="fas fa-times" id="search-clear" title="清除搜尋"></i>
-        </div>
-
         <div id="nav-countdown">
             <i class="fas fa-sun" style="color:#FFA101"></i>
             <span id="countdown-text">載入中…</span>
@@ -824,51 +791,51 @@
         <div id="tools-grid">
 
             <!-- AI 區 -->
-            <div class="resource-card" data-section="AI 區">
+            <div class="resource-card">
                 <div class="card-header">
                     <div class="card-icon"><i class="fas fa-robot"></i></div>
                     <span class="card-title">AI 區</span>
                 </div>
                 <div class="links-grid">
-                    <a href="https://gemini.google.com/" target="_blank" class="card-link" data-name="Gemini">Gemini</a>
-                    <a href="https://notebooklm.google.com/" target="_blank" class="card-link"
-                        data-name="Notebook LM">Notebook LM</a>
-                    <a href="https://chat.openai.com/" target="_blank" class="card-link" data-name="ChatGPT">ChatGPT</a>
-                    <a href="https://claude.ai/" target="_blank" class="card-link" data-name="Claude">Claude</a>
-                    <a href="https://www.perplexity.ai/" target="_blank" class="card-link"
-                        data-name="Perplexity">Perplexity</a>
-                    <a href="https://makersuite.google.com/" target="_blank" class="card-link" data-name="AI Studio">AI
-                        Studio</a>
-                    <a href="https://stitch.withgoogle.com/" target="_blank" class="card-link"
-                        data-name="Stitch">Stitch</a>
-                    <a href="https://app.edcafe.ai/me/home" target="_blank" class="card-link"
-                        data-name="EDcafe">EDcafe</a>
+                    <a href="https://gemini.google.com/" target="_blank" class="card-link"><i
+                            class="fas fa-sparkles"></i>Gemini</a>
+                    <a href="https://notebooklm.google.com/" target="_blank" class="card-link"><i
+                            class="fas fa-book-open"></i>NBLM</a>
+                    <a href="https://chat.openai.com/" target="_blank" class="card-link"><i
+                            class="fas fa-comment-dots"></i>ChatGPT</a>
+                    <a href="https://claude.ai/" target="_blank" class="card-link"><i
+                            class="fas fa-ghost"></i>Claude</a>
+                    <a href="https://makersuite.google.com/" target="_blank" class="card-link"><i
+                            class="fas fa-vial"></i>AI Studio</a>
+                    <a href="https://app.edcafe.ai/me/home" target="_blank" class="card-link"><i
+                            class="fas fa-coffee"></i>EDcafe</a>
                 </div>
             </div>
 
             <!-- 書商資源區 -->
-            <div class="resource-card" data-section="書商資源區">
+            <div class="resource-card">
                 <div class="card-header">
                     <div class="card-icon"><i class="fas fa-book-open"></i></div>
                     <span class="card-title">書商資源區</span>
                 </div>
                 <div class="links-grid">
-                    <a href="https://edisc3.hle.com.tw/" target="_blank" class="card-link" data-name="翰林電子書">翰林電子書</a>
-                    <a href="https://hanlindigi.hle.com.tw/" target="_blank" class="card-link" data-name="翰林平台">翰林平台</a>
-                    <a href="https://mgz.hle.com.tw/" target="_blank" class="card-link" data-name="期刊大師">期刊大師</a>
-                    <a href="https://testbank.hle.com.tw/" target="_blank" class="card-link" data-name="翰林出題">翰林出題</a>
-                    <a href="https://nanibox3.oneclass.com.tw/" target="_blank" class="card-link"
-                        data-name="南一資源">南一資源</a>
-                    <a href="https://nanipaper.oneclass.com.tw/" target="_blank" class="card-link"
-                        data-name="南一出題">南一出題</a>
-                    <a href="https://digitalmaster.knsh.com.tw/" target="_blank" class="card-link"
-                        data-name="康軒電子書">康軒電子書</a>
-                    <a href="https://quiz.knsh.com.tw/" target="_blank" class="card-link" data-name="康軒出題">康軒出題</a>
+                    <a href="https://edisc3.hle.com.tw/edisc_v3/ebook_v2023.html#degree=%E5%9C%8B%E4%B8%AD&cat=%E6%95%B8%E5%AD%B8&prd=JMA&year=114%E4%B8%8B&grade=%E5%85%A8%E5%B9%B4%E7%B4%9A&tab=tab2"
+                        target="_blank" class="card-link"><i class="fas fa-tablet-screen-button"></i>翰林電子書</a>
+                    <a href="https://hanlindigi.hle.com.tw/" target="_blank" class="card-link"><i
+                            class="fas fa-desktop"></i>翰林平台</a>
+                    <a href="https://mgz.hle.com.tw/" target="_blank" class="card-link"><i
+                            class="fas fa-newspaper"></i>期刊大師</a>
+                    <a href="https://nanibox3.oneclass.com.tw/" target="_blank" class="card-link"><i
+                            class="fas fa-folder-tree"></i>南一資源</a>
+                    <a href="https://nanipaper.oneclass.com.tw/" target="_blank" class="card-link"><i
+                            class="fas fa-file-pen"></i>南一出題</a>
+                    <a href="https://digitalmaster.knsh.com.tw/" target="_blank" class="card-link"><i
+                            class="fas fa-book"></i>康軒電子書</a>
                 </div>
             </div>
 
             <!-- 放鬆區 -->
-            <div class="resource-card" data-section="放鬆區">
+            <div class="resource-card">
                 <div class="card-header">
                     <div class="card-icon"><i class="fas fa-mug-hot"></i></div>
                     <span class="card-title">放鬆區</span>
@@ -883,7 +850,7 @@
                     <a href="https://www.youtube.com/" target="_blank" class="icon-link" data-name="YouTube"
                         data-tooltip="YouTube"><i class="fab fa-youtube"></i></a>
                     <a href="https://94580.net/" target="_blank" class="icon-link" data-name="94580"
-                        data-tooltip="94580"><i class="fas fa-gamepad"></i></a>
+                        data-tooltip="94580"><i class="fas fa-video"></i></a>
                     <a href="https://shopee.tw/" target="_blank" class="icon-link" data-name="蝦皮購物"
                         data-tooltip="蝦皮購物"><i class="fas fa-bag-shopping"></i></a>
                     <a href="https://www.momoshop.com.tw/" target="_blank" class="icon-link" data-name="Momo購物"
@@ -894,106 +861,82 @@
             </div>
 
             <!-- 行政區 -->
-            <div class="resource-card" data-section="行政區">
+            <div class="resource-card">
                 <div class="card-header">
                     <div class="card-icon"><i class="fas fa-folder-open"></i></div>
                     <span class="card-title">行政區</span>
                 </div>
                 <div class="links-grid">
-                    <a href="https://www.set.edu.tw/" target="_blank" class="card-link" data-name="特通網">特通網</a>
-                    <a href="https://eschool.hlc.edu.tw/" target="_blank" class="card-link"
-                        data-name="全誼校務系統">全誼校務系統</a>
-                    <a href="https://news.hlc.edu.tw/" target="_blank" class="card-link" data-name="花蓮處務公告">花蓮處務公告</a>
-                    <a href="https://srec.hlc.edu.tw/" target="_blank" class="card-link" data-name="特教資源網">特教資源網</a>
-                    <a href="https://special.moe.gov.tw/" target="_blank" class="card-link" data-name="特教研習">特教研習</a>
-                    <a href="https://www1.inservice.edu.tw/" target="_blank" class="card-link" data-name="全國研習">全國研習</a>
-                    <a href="https://drive.google.com/drive/folders/15F9f5dW6PHYode_w1opdEKLYkoNKmnMe" target="_blank"
-                        class="card-link" data-name="鑑定表單">鑑定表單</a>
-                    <a href="https://www.irasutoya.com/" target="_blank" class="card-link"
-                        data-name="Irasutoya">Irasutoya</a>
-                    <a href="https://www.flaticon.com/" target="_blank" class="card-link"
-                        data-name="Flaticon">Flaticon</a>
-                    <a href="https://chojugiga.com/" target="_blank" class="card-link" data-name="鳥獸戲畫">鳥獸戲畫</a>
+                    <a href="https://www.set.edu.tw/" target="_blank" class="card-link"><i
+                            class="fas fa-globe"></i>特通網</a>
+                    <a href="https://eschool.hlc.edu.tw/" target="_blank" class="card-link"><i
+                            class="fas fa-school"></i>全誼</a>
+                    <a href="https://news.hlc.edu.tw/" target="_blank" class="card-link"><i
+                            class="fas fa-bullhorn"></i>處務公告</a>
+                    <a href="https://srec.hlc.edu.tw/" target="_blank" class="card-link"><i
+                            class="fas fa-id-card"></i>特教資源網</a>
+                    <a href="https://special.moe.gov.tw/" target="_blank" class="card-link"><i
+                            class="fas fa-certificate"></i>特教研習</a>
+                    <a href="https://www1.inservice.edu.tw/" target="_blank" class="card-link"><i
+                            class="fas fa-chalkboard-user"></i>全國研習</a>
+                    <a href="https://www.irasutoya.com/" target="_blank" class="card-link"><i
+                            class="fas fa-image"></i>Irasutoya</a>
+                    <a href="https://chojugiga.com/" target="_blank" class="card-link"><i
+                            class="fas fa-palette"></i>鳥獸戲畫</a>
                 </div>
             </div>
 
             <!-- 互動教學工具 -->
-            <div class="resource-card" data-section="互動教學工具">
+            <div class="resource-card">
                 <div class="card-header">
                     <div class="card-icon"><i class="fas fa-gamepad"></i></div>
                     <span class="card-title">互動教學工具</span>
                 </div>
                 <div class="links-grid">
-                    <a href="https://classroom.google.com/" target="_blank" class="card-link"
-                        data-name="Classroom">Classroom</a>
-                    <a href="https://www.learnmode.net/" target="_blank" class="card-link" data-name="學習吧">學習吧</a>
-                    <a href="https://teach.classdojo.com/" target="_blank" class="card-link"
-                        data-name="ClassDojo">ClassDojo</a>
-                    <a href="https://sites.google.com/view/specialchu/home" target="_blank" class="card-link"
-                        data-name="線上學習區">線上學習區</a>
-                    <a href="https://wordwall.net/" target="_blank" class="card-link" data-name="Wordwall">Wordwall</a>
-                    <a href="https://quizizz.com/" target="_blank" class="card-link" data-name="Quizizz">Quizizz</a>
-                    <a href="https://dashboard.blooket.com/" target="_blank" class="card-link"
-                        data-name="Blooket">Blooket</a>
-                    <a href="https://www.gimkit.com/" target="_blank" class="card-link" data-name="Gimkit">Gimkit</a>
-                    <a href="https://create.kahoot.it/" target="_blank" class="card-link" data-name="Kahoot">Kahoot</a>
-                    <a href="https://toytheater.com/" target="_blank" class="card-link" data-name="Toy Theater">Toy
-                        Theater</a>
-                    <a href="https://emath.math.ncu.edu.tw/" target="_blank" class="card-link" data-name="子由數學">子由數學</a>
-                    <a href="https://subjects.modernedu.hk/" target="_blank" class="card-link" data-name="數學 App">數學
-                        App</a>
-                    <a href="https://polypad.amplify.com/" target="_blank" class="card-link"
-                        data-name="Mathigon">Mathigon</a>
-                    <a href="https://www.geogebra.org/" target="_blank" class="card-link" data-name="繪圖計算機">繪圖計算機</a>
-                    <a href="https://aaclearningbackend.azurewebsites.net/" target="_blank" class="card-link"
-                        data-name="AAC">AAC</a>
-                    <a href="https://soundoftext.com/" target="_blank" class="card-link" data-name="文字轉語音">文字轉語音</a>
-                    <a href="https://naozhong.tw/設置計時器-5-分鐘/" target="_blank" class="card-link"
-                        data-name="線上計時器">線上計時器</a>
+                    <a href="https://teach.classdojo.com/" target="_blank" class="card-link"><i
+                            class="fas fa-face-smile"></i>ClassDojo</a>
+                    <a href="https://wordwall.net/" target="_blank" class="card-link"><i
+                            class="fas fa-border-all"></i>Wordwall</a>
+                    <a href="https://wayground.com/admin" target="_blank" class="card-link"><i
+                            class="fas fa-play"></i>Wayground</a>
+                    <a href="https://dashboard.blooket.com/" target="_blank" class="card-link"><i
+                            class="fas fa-cube"></i>Blooket</a>
+                    <a href="https://www.gimkit.com/" target="_blank" class="card-link"><i
+                            class="fas fa-gamepad"></i>Gimkit</a>
+                    <a href="https://toytheater.com/" target="_blank" class="card-link"><i
+                            class="fas fa-puzzle-piece"></i>Toy Theater</a>
+                    <a href="https://emath.math.ncu.edu.tw/" target="_blank" class="card-link"><i
+                            class="fas fa-calculator"></i>子由數學</a>
+                    <a href="https://aaclearningbackend.azurewebsites.net/" target="_blank" class="card-link"><i
+                            class="fas fa-volume-high"></i>AAC</a>
                 </div>
             </div>
 
             <!-- 工具區 -->
-            <div class="resource-card" data-section="工具區">
+            <div class="resource-card">
                 <div class="card-header">
                     <div class="card-icon"><i class="fas fa-wrench"></i></div>
                     <span class="card-title">工具區</span>
                 </div>
                 <div class="icon-links-grid">
-                    <a href="https://drive.google.com/" target="_blank" class="icon-link" data-name="Google 雲端"
-                        data-tooltip="Google 雲端"><i class="fas fa-cloud"></i></a>
-                    <a href="https://docs.google.com/" target="_blank" class="icon-link" data-name="Google 文件"
-                        data-tooltip="Google 文件"><i class="fas fa-file-lines"></i></a>
-                    <a href="https://slides.google.com/" target="_blank" class="icon-link" data-name="Google 簡報"
-                        data-tooltip="Google 簡報"><i class="fas fa-display"></i></a>
-                    <a href="https://sheets.google.com/" target="_blank" class="icon-link" data-name="Google 試算表"
-                        data-tooltip="Google 試算表"><i class="fas fa-table"></i></a>
-                    <a href="https://forms.google.com/" target="_blank" class="icon-link" data-name="Google 表單"
-                        data-tooltip="Google 表單"><i class="fas fa-rectangle-list"></i></a>
-                    <a href="https://mail.google.com/" target="_blank" class="icon-link" data-name="Gmail"
-                        data-tooltip="Gmail"><i class="fas fa-envelope"></i></a>
-                    <a href="https://calendar.google.com/" target="_blank" class="icon-link" data-name="Google 日曆"
-                        data-tooltip="Google 日曆"><i class="fas fa-calendar-days"></i></a>
-                    <a href="https://keep.google.com/" target="_blank" class="icon-link" data-name="Keep"
-                        data-tooltip="Keep"><i class="fas fa-lightbulb"></i></a>
-                    <a href="https://translate.google.com/" target="_blank" class="icon-link" data-name="Google 翻譯"
-                        data-tooltip="Google 翻譯"><i class="fas fa-language"></i></a>
+                    <a href="https://drive.google.com/" target="_blank" class="icon-link" data-tooltip="Google 雲端"><i
+                            class="fas fa-cloud"></i></a>
+                    <a href="https://forms.google.com/" target="_blank" class="icon-link" data-tooltip="Google 表單"><i
+                            class="fas fa-rectangle-list"></i></a>
+                    <a href="https://mail.google.com/" target="_blank" class="icon-link" data-tooltip="Gmail"><i
+                            class="fas fa-envelope"></i></a>
+                    <a href="https://calendar.google.com/" target="_blank" class="icon-link" data-tooltip="Google 日曆"><i
+                            class="fas fa-calendar-days"></i></a>
+                    <a href="https://keep.google.com/" target="_blank" class="icon-link" data-tooltip="Keep"><i
+                            class="fas fa-lightbulb"></i></a>
                     <a href="https://login.microsoftonline.com/" target="_blank" class="icon-link"
-                        data-name="Office 365" data-tooltip="Office 365"><i class="fab fa-microsoft"></i></a>
-                    <a href="https://www.canva.com/zh_tw/" target="_blank" class="icon-link" data-name="Canva"
-                        data-tooltip="Canva"><i class="fas fa-palette"></i></a>
-                    <a href="https://www.notion.so/" target="_blank" class="icon-link" data-name="Notion"
-                        data-tooltip="Notion"><i class="fas fa-book-open"></i></a>
-                    <a href="https://github.com/chuoneone?tab=repositories" target="_blank" class="icon-link"
-                        data-name="GitHub" data-tooltip="GitHub"><i class="fab fa-github"></i></a>
+                        data-tooltip="Office 365"><i class="fab fa-microsoft"></i></a>
+                    <a href="https://www.notion.so/" target="_blank" class="icon-link" data-tooltip="Notion"><i
+                            class="fas fa-book-open"></i></a>
                 </div>
             </div>
 
-            <!-- Empty search state -->
-            <div id="search-empty">
-                <i class="fas fa-search-minus"></i>
-                <p>找不到符合的工具，試試其他關鍵字</p>
-            </div>
+
         </div>
 
         <!-- ── RIGHT: Sidebar ── -->
@@ -1007,6 +950,9 @@
                 <img src="dog4.png" class="dog-slide opacity-0" alt="愛犬 4" />
                 <img src="dog5.png" class="dog-slide opacity-0" alt="愛犬 5" />
                 <img src="dog6.png" class="dog-slide opacity-0" alt="愛犬 6" />
+                <img src="dog7.png" class="dog-slide opacity-0" alt="愛犬 7" />
+                <img src="dog8.png" class="dog-slide opacity-0" alt="愛犬 8" />
+                <img src="dog9.png" class="dog-slide opacity-0" alt="愛犬 9" />
                 <div class="dog-gradient"></div>
                 <div class="dog-caption">
                     <h3>My Lovely Dogs</h3>
@@ -1179,70 +1125,7 @@
                 loadFromCloud();
             })();
 
-            /* ─── Search ─── */
-            (function () {
-                const input = document.getElementById('search-input');
-                const clear = document.getElementById('search-clear');
-                const cards = document.querySelectorAll('.resource-card');
-                const empty = document.getElementById('search-empty');
 
-                function runSearch() {
-                    const q = input.value.trim().toLowerCase();
-                    clear.style.display = q ? 'block' : 'none';
-                    let anyCard = false;
-
-                    cards.forEach(card => {
-                        if (card.id === 'search-empty') return;
-                        const links = card.querySelectorAll('.card-link');
-                        let anyLink = false;
-
-                        links.forEach(link => {
-                            const name = link.getAttribute('data-name') || '';
-                            const isIconLink = link.classList.contains('icon-link');
-                            if (!q || name.toLowerCase().includes(q)) {
-                                link.classList.remove('search-hidden');
-                                if (!isIconLink) {
-                                    if (q) {
-                                        const i = name.toLowerCase().indexOf(q);
-                                        link.innerHTML =
-                                            name.slice(0, i) +
-                                            '<mark>' + name.slice(i, i + q.length) + '</mark>' +
-                                            name.slice(i + q.length);
-                                    } else {
-                                        link.textContent = name;
-                                    }
-                                }
-                                anyLink = true;
-                            } else {
-                                link.classList.add('search-hidden');
-                                if (!isIconLink) link.textContent = name;
-                            }
-                        });
-
-                        if (anyLink) { card.classList.remove('search-hidden'); anyCard = true; }
-                        else card.classList.add('search-hidden');
-                    });
-
-                    empty.style.display = (q && !anyCard) ? 'block' : 'none';
-                }
-
-                input.addEventListener('input', runSearch);
-
-                // Enter → open first visible link
-                input.addEventListener('keydown', e => {
-                    if (e.key === 'Enter') {
-                        const first = document.querySelector('.card-link:not(.search-hidden)');
-                        if (first) first.click();
-                    }
-                });
-
-                // Clear button
-                clear.addEventListener('click', () => {
-                    input.value = '';
-                    input.focus();
-                    runSearch();
-                });
-            })();
 
         });
     </script>
