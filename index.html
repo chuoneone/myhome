@@ -4,496 +4,817 @@
     <meta charset="UTF-8" />
     <meta name="viewport" content="width=device-width, initial-scale=1.0" />
     <title>Chuone Toolbox</title>
+    <meta name="description" content="Chuone Toolbox — 教師日常工具快速入口，整合 AI、教學、行政、工具資源。" />
     <link rel="icon" type="image/png" href="read.png" />
-    
+
     <link rel="preconnect" href="https://fonts.googleapis.com" />
     <link rel="preconnect" href="https://fonts.gstatic.com" crossorigin />
-    <link href="https://fonts.googleapis.com/css2?family=Lora:ital,wght@0,400;0,500;0,600;0,700;1,400&family=Plus+Jakarta+Sans:wght@400;500;600;700&family=Noto+Sans+TC:wght@300;400;500;700&display=swap" rel="stylesheet" />
-    
+    <link href="https://fonts.googleapis.com/css2?family=Lora:ital,wght@0,400;0,700;1,400&family=Plus+Jakarta+Sans:wght@400;500;600;700&family=Noto+Sans+TC:wght@300;400;500;700&display=swap" rel="stylesheet" />
     <link rel="stylesheet" href="https://cdnjs.cloudflare.com/ajax/libs/font-awesome/6.5.1/css/all.min.css" />
-    
-    <script src="https://cdn.tailwindcss.com?plugins=forms"></script>
-    <script>
-        tailwind.config = {
-            theme: {
-                extend: {
-                    fontFamily: {
-                        sans: ['Plus Jakarta Sans', 'Noto Sans TC', 'sans-serif'],
-                        serif: ['Lora', 'serif'],
-                    },
-                    colors: {
-                        'sage-light': '#FFFFFF',
-                        'sage-main': '#B3DEE5',
-                        'highlight': '#FFA101',
-                        'sage-dark': '#2A464E',
-                        'forest-dark': '#31525B',
-                        'cream': '#F9FAFB',
-                        'warm-gray': '#E5E7EB',
-                        'link-bg': '#F3F4F6',
-                    },
-                    boxShadow: {
-                        'soft': '0 4px 20px -2px rgba(49, 82, 91, 0.05)',
-                        'soft-hover': '0 10px 25px -5px rgba(49, 82, 91, 0.1)',
-                    }
-                },
-            },
-        };
-    </script>
+
     <style>
+        *, *::before, *::after { box-sizing: border-box; margin: 0; padding: 0; }
+
         body {
-            background-color: #F9FAFB;
-            color: #31525B;
-            overflow-x: hidden;
             font-family: 'Plus Jakarta Sans', 'Noto Sans TC', sans-serif;
+            background: #F2F7F8;
+            color: #31525B;
+            min-height: 100vh;
+            overflow-x: hidden;
         }
 
-        h1, h2, h3, h4, .nav-logo-text {
-            font-family: 'Lora', serif;
-        }
-
-        ::-webkit-scrollbar { width: 8px; }
-        ::-webkit-scrollbar-track { background: #F9FAFB; }
+        /* ── Scrollbar ── */
+        ::-webkit-scrollbar { width: 7px; }
+        ::-webkit-scrollbar-track { background: #F2F7F8; }
         ::-webkit-scrollbar-thumb { background: #B3DEE5; border-radius: 4px; }
         ::-webkit-scrollbar-thumb:hover { background: #FFA101; }
-        
-        .no-scrollbar::-webkit-scrollbar {
-            display: none;
-        }
-        .no-scrollbar {
-            -ms-overflow-style: none;
-            scrollbar-width: none;
+
+        /* ════════════════════════
+           NAVBAR
+        ════════════════════════ */
+        #main-nav {
+            position: sticky;
+            top: 0;
+            z-index: 50;
+            background: #B3DEE5;
+            border-bottom: 1px solid rgba(255,255,255,0.55);
+            box-shadow: 0 2px 10px -3px rgba(49,82,91,0.1);
+            padding: 10px 20px;
+            display: flex;
+            align-items: center;
+            gap: 14px;
+            height: 60px;
         }
 
-        .nav-link {
-            position: relative;
-            font-weight: 600;
-            color: #31525B;
-            letter-spacing: 0.05em;
+        /* Logo */
+        .nav-logo {
+            display: flex;
+            align-items: center;
+            gap: 9px;
             cursor: pointer;
-            transition: all 0.3s ease;
+            text-decoration: none;
+            flex-shrink: 0;
         }
-        .nav-link:hover {
-            color: #ffffff; 
-            text-shadow: 0 1px 3px rgba(49, 82, 91, 0.4);
+        .nav-logo img {
+            width: 36px;
+            height: 36px;
+            border-radius: 50%;
+            border: 2px solid #31525B;
+            object-fit: cover;
+            transition: border-color 0.2s;
         }
-        .nav-link::after {
-            content: '';
-            position: absolute;
-            width: 0;
-            height: 3px;
-            bottom: -4px;
-            left: 50%;
-            background-color: #FFA101;
-            transition: all 0.3s ease;
-            transform: translateX(-50%);
+        .nav-logo:hover img { border-color: #FFA101; }
+        .nav-logo-text {
+            font-family: 'Lora', serif;
+            font-size: 1.05rem;
+            font-weight: 700;
+            color: #31525B;
+            white-space: nowrap;
+            transition: color 0.2s;
         }
-        .nav-link:hover::after {
+        .nav-logo:hover .nav-logo-text { color: white; }
+
+        /* Search bar */
+        #search-wrapper {
+            flex: 1;
+            position: relative;
+            max-width: 580px;
+        }
+        #search-input {
             width: 100%;
+            padding: 8px 38px 8px 16px;
+            border: 1.5px solid rgba(49,82,91,0.2);
+            border-radius: 30px;
+            font-size: 0.88rem;
+            font-family: inherit;
+            color: #31525B;
+            background: rgba(255,255,255,0.72);
+            outline: none;
+            transition: border-color 0.2s, box-shadow 0.2s, background 0.2s;
+        }
+        #search-input:focus {
+            border-color: #FFA101;
+            background: white;
+            box-shadow: 0 0 0 3px rgba(255,161,1,0.18);
+        }
+        #search-input::placeholder { color: #7AAAB3; }
+        #search-clear {
+            position: absolute;
+            right: 13px;
+            top: 50%;
+            transform: translateY(-50%);
+            color: #9CA3AF;
+            cursor: pointer;
+            font-size: 0.8rem;
+            display: none;
+            transition: color 0.2s;
+        }
+        #search-clear:hover { color: #FFA101; }
+
+        /* Countdown */
+        #nav-countdown {
+            flex-shrink: 0;
+            background: #31525B;
+            color: white;
+            font-size: 0.76rem;
+            font-weight: 700;
+            padding: 7px 16px;
+            border-radius: 20px;
+            white-space: nowrap;
+            display: flex;
+            align-items: center;
+            gap: 5px;
+            letter-spacing: 0.02em;
+        }
+
+        /* ════════════════════════
+           PAGE BODY  (2-column)
+        ════════════════════════ */
+        #page-body {
+            display: grid;
+            grid-template-columns: 1fr 300px;
+            gap: 18px;
+            max-width: 1500px;
+            margin: 0 auto;
+            padding: 20px 20px 48px;
+            align-items: start;
+        }
+
+        /* ── Sidebar (right) ── */
+        #sidebar {
+            position: sticky;
+            top: 70px;
+            display: flex;
+            flex-direction: column;
+            gap: 14px;
+        }
+
+        /* Dog slideshow */
+        #dog-panel {
+            border-radius: 15px;
+            overflow: hidden;
+            position: relative;
+            aspect-ratio: 4 / 3;
+            background: #B3DEE5;
+            box-shadow: 0 4px 18px -5px rgba(49,82,91,0.15);
+            flex-shrink: 0;
+        }
+        #dog-panel img.dog-slide {
+            position: absolute;
+            inset: 0;
+            width: 100%;
+            height: 100%;
+            object-fit: cover;
+            transition: opacity 1s ease;
+        }
+        #dog-panel img.dog-slide.opacity-0 { opacity: 0; }
+        #dog-panel img.dog-slide.opacity-100 { opacity: 1; }
+        #dog-panel .dog-gradient {
+            position: absolute;
+            inset: 0;
+            background: linear-gradient(to top, rgba(49,82,91,0.45) 0%, transparent 55%);
+            z-index: 1;
+        }
+        #dog-panel .dog-caption {
+            position: absolute;
+            bottom: 12px;
+            left: 14px;
+            color: white;
+            z-index: 2;
+        }
+        #dog-panel .dog-caption h3 {
+            font-family: 'Lora', serif;
+            font-size: 0.95rem;
+            font-style: italic;
+        }
+        #dog-panel .dog-caption p {
+            font-size: 0.7rem;
+            opacity: 0.85;
+            margin-top: 2px;
+        }
+
+        /* Google Keep */
+        #keep-panel {
+            border-radius: 15px;
+            overflow: hidden;
+            background: white;
+            box-shadow: 0 4px 18px -5px rgba(49,82,91,0.1);
+            border: 1px solid #E5E7EB;
+        }
+        .keep-header {
+            display: flex;
+            align-items: center;
+            gap: 8px;
+            padding: 9px 14px;
+            background: #FBBC04;
+            color: #31525B;
+        }
+        .keep-header i { font-size: 0.95rem; }
+        .keep-header span { font-weight: 700; font-size: 0.82rem; }
+        .keep-header a {
+            margin-left: auto;
+            color: #31525B;
+            opacity: 0.65;
+            font-size: 0.75rem;
+            text-decoration: none;
+            transition: opacity 0.2s;
+        }
+        .keep-header a:hover { opacity: 1; }
+
+        #keep-frame {
+            width: 100%;
+            height: 460px;
+            border: none;
+            display: block;
+        }
+        /* Fallback if Keep blocks iframe */
+        #keep-fallback {
+            display: none;
+            padding: 24px 16px;
+            text-align: center;
+        }
+        #keep-fallback p {
+            font-size: 0.82rem;
+            color: #6B7280;
+            line-height: 1.6;
+            margin-bottom: 14px;
+        }
+        #keep-fallback a {
+            display: inline-flex;
+            align-items: center;
+            gap: 7px;
+            background: #FBBC04;
+            color: #31525B;
+            font-weight: 700;
+            font-size: 0.85rem;
+            padding: 9px 22px;
+            border-radius: 22px;
+            text-decoration: none;
+            transition: opacity 0.2s, transform 0.2s;
+        }
+        #keep-fallback a:hover { opacity: 0.88; transform: translateY(-1px); }
+
+        /* ── Tool cards grid (left) ── */
+        #tools-grid {
+            display: grid;
+            grid-template-columns: repeat(auto-fill, minmax(240px, 1fr));
+            gap: 14px;
         }
 
         .resource-card {
             background: white;
-            border: 1px solid #E5E7EB;
-            border-bottom: 3px solid #E5E7EB;
-            border-radius: 12px;
-            transition: all 0.4s ease;
-            height: 100%;
-            box-shadow: 0 2px 5px rgba(0,0,0,0.02);
+            border: 1px solid #E9EEF0;
+            border-bottom: 3px solid #E9EEF0;
+            border-radius: 14px;
+            padding: 16px;
+            transition: transform 0.3s ease, box-shadow 0.3s ease, border-color 0.3s ease;
+            box-shadow: 0 2px 6px rgba(0,0,0,0.025);
         }
         .resource-card:hover {
-            transform: translateY(-5px);
-            box-shadow: 0 10px 30px -10px rgba(0,0,0,0.1);
+            transform: translateY(-4px);
+            box-shadow: 0 10px 28px -8px rgba(49,82,91,0.12);
             border-color: #B3DEE5;
             border-bottom-color: #FFA101;
+        }
+        .resource-card.search-hidden { display: none; }
+
+        .card-header {
+            display: flex;
+            align-items: center;
+            gap: 10px;
+            padding-bottom: 12px;
+            margin-bottom: 12px;
+            border-bottom: 1px solid #F3F4F6;
+        }
+        .card-icon {
+            width: 30px;
+            height: 30px;
+            border-radius: 50%;
+            background: rgba(255,161,1,0.12);
+            color: #FFA101;
+            display: flex;
+            align-items: center;
+            justify-content: center;
+            font-size: 0.82rem;
+            flex-shrink: 0;
+        }
+        .card-title {
+            font-family: 'Lora', serif;
+            font-size: 0.98rem;
+            font-weight: 700;
+            color: #31525B;
+        }
+
+        .links-grid {
+            display: grid;
+            grid-template-columns: 1fr 1fr;
+            gap: 7px;
         }
 
         .card-link {
             display: block;
-            padding: 8px 10px;
-            background-color: #F3F4F6;
+            padding: 7px 8px;
+            background: #F3F6F7;
             border-radius: 8px;
             font-weight: 600;
-            font-size: 0.95rem;
-            transition: all 0.3s;
-            border: 1px solid transparent;
+            font-size: 0.84rem;
             text-align: center;
             color: #31525B;
+            text-decoration: none;
             white-space: nowrap;
             overflow: hidden;
             text-overflow: ellipsis;
+            transition: background 0.22s, color 0.22s, transform 0.22s, box-shadow 0.22s;
+            border: 1px solid transparent;
         }
         .card-link:hover {
-            background-color: #FFA101;
-            color: #ffffff; 
-            box-shadow: 0 4px 6px -1px rgba(255, 161, 1, 0.3);
+            background: #FFA101;
+            color: white;
+            box-shadow: 0 4px 10px -2px rgba(255,161,1,0.35);
             transform: translateY(-1px);
         }
-        
-        .fade-in {
-            animation: fadeIn 0.8s ease-out forwards;
-            opacity: 0;
-            transform: translateY(20px);
-        }
-        @keyframes fadeIn {
-            to { opacity: 1; transform: translateY(0); }
+        .card-link.search-hidden { display: none; }
+        .card-link mark {
+            background: #FFA101;
+            color: white;
+            border-radius: 2px;
+            padding: 0 2px;
         }
 
-        .section-container { scroll-margin-top: 100px; }
+        /* Icon-only grid (works area) */
+        .icon-links-grid {
+            display: grid;
+            grid-template-columns: repeat(4, 1fr);
+            gap: 8px;
+        }
+        .icon-link {
+            display: flex;
+            align-items: center;
+            justify-content: center;
+            aspect-ratio: 1;
+            background: #F3F6F7;
+            border-radius: 10px;
+            color: #31525B;
+            text-decoration: none;
+            font-size: 1.15rem;
+            transition: background 0.22s, color 0.22s, transform 0.22s, box-shadow 0.22s;
+            border: 1px solid transparent;
+            cursor: pointer;
+        }
+        .icon-link:hover {
+            background: #FFA101;
+            color: white;
+            transform: translateY(-2px);
+            box-shadow: 0 4px 10px -2px rgba(255,161,1,0.38);
+        }
+        .icon-link.search-hidden { display: none; }
+
+        /* Custom Tooltip */
+        .icon-link { position: relative; }
+        .icon-link::before {
+            content: attr(data-tooltip);
+            position: absolute;
+            bottom: 125%;
+            left: 50%;
+            transform: translateX(-50%) translateY(5px);
+            background: #31525B;
+            color: white;
+            padding: 4px 8px;
+            border-radius: 4px;
+            font-size: 0.7rem;
+            white-space: nowrap;
+            opacity: 0;
+            visibility: hidden;
+            transition: all 0.15s ease;
+            pointer-events: none;
+            z-index: 100;
+        }
+        .icon-link:hover::before {
+            opacity: 1;
+            visibility: visible;
+            transform: translateX(-50%) translateY(0);
+        }
+        .icon-link::after {
+            content: '';
+            position: absolute;
+            bottom: 110%;
+            left: 50%;
+            transform: translateX(-50%);
+            border: 5px solid transparent;
+            border-top-color: #31525B;
+            opacity: 0;
+            visibility: hidden;
+            transition: all 0.15s ease;
+            pointer-events: none;
+            z-index: 100;
+        }
+        .icon-link:hover::after {
+            opacity: 1;
+            visibility: visible;
+        }
+
+        /* Empty search state */
+        #search-empty {
+            display: none;
+            grid-column: 1 / -1;
+            text-align: center;
+            padding: 52px 0;
+            color: #A0B4B8;
+        }
+        #search-empty i { font-size: 2rem; margin-bottom: 10px; display: block; }
+        #search-empty p { font-size: 0.9rem; }
+
+        /* ── Footer ── */
+        footer {
+            background: #B3DEE5;
+            border-top: 1px solid rgba(255,255,255,0.5);
+            padding: 20px 24px;
+            text-align: center;
+            font-size: 0.78rem;
+            color: #31525B;
+            font-weight: 600;
+        }
+        footer span { opacity: 0.6; font-style: italic; font-family: 'Lora', serif; }
+
+        /* ── Fade in ── */
+        .fade-in {
+            animation: fadeUp 0.55s ease-out both;
+        }
+        @keyframes fadeUp {
+            from { opacity: 0; transform: translateY(14px); }
+            to   { opacity: 1; transform: translateY(0); }
+        }
+
+        /* ── Responsive ── */
+        @media (max-width: 860px) {
+            #page-body {
+                grid-template-columns: 1fr;
+                padding: 14px 14px 40px;
+            }
+            #sidebar {
+                position: static;
+                order: -1;
+                flex-direction: row;
+                flex-wrap: wrap;
+            }
+            #dog-panel {
+                flex: 1 1 220px;
+                aspect-ratio: 4 / 3;
+                min-width: 160px;
+            }
+            #keep-panel { flex: 2 1 280px; }
+            #keep-frame { height: 280px; }
+        }
+        @media (max-width: 540px) {
+            .nav-logo-text { display: none; }
+            #sidebar { flex-direction: column; }
+        }
     </style>
 </head>
-<body class="flex flex-col min-h-screen relative">
+<body>
 
-    <!-- 導覽列 -->
-    <nav class="w-full py-5 px-6 md:px-12 flex justify-between items-center z-50 bg-sage-main sticky top-0 shadow-sm transition-all border-b border-white/50">
-        <div class="flex items-center gap-3 cursor-pointer group" onclick="switchView('home')">
-            <div class="w-10 h-10 rounded-full border-2 border-forest-dark overflow-hidden bg-white shadow-sm transition-all duration-300 group-hover:shadow-md group-hover:border-highlight">
-                <img src="dog.png" alt="Logo" class="w-full h-full object-cover">
-            </div>
-            <div class="flex flex-col justify-center">
-                <span class="text-xl font-bold tracking-wide leading-none font-serif nav-logo-text text-forest-dark group-hover:text-white transition-colors">Chuone Toolbox</span>
-            </div>
+    <!-- ══════════════ NAVBAR ══════════════ -->
+    <nav id="main-nav">
+        <a class="nav-logo" href="#">
+            <img src="dog.png" alt="Chuone Logo" />
+            <span class="nav-logo-text">Chuone Toolbox</span>
+        </a>
+
+        <div id="search-wrapper">
+            <input
+                id="search-input"
+                type="search"
+                placeholder="🔍 搜尋工具（Gemini、翰林、雲端、Kahoot…）"
+                autocomplete="off"
+                spellcheck="false"
+            />
+            <i class="fas fa-times" id="search-clear" title="清除搜尋"></i>
         </div>
 
-        <div class="hidden md:flex items-center gap-8">
-            <div onclick="switchView('ai')" class="nav-link text-sm uppercase">AI 區</div>
-            <div onclick="switchView('relax')" class="nav-link text-sm uppercase">放鬆區</div>
-            <div onclick="switchView('tools')" class="nav-link text-sm uppercase">工具區</div>
-            <div onclick="switchView('teach')" class="nav-link text-sm uppercase">教學區</div>
-            <div onclick="switchView('admin')" class="nav-link text-sm uppercase">行政區</div>
-            <div id="nav-countdown" class="bg-forest-dark text-white text-xs py-2 px-5 rounded-full cursor-default min-w-[160px] text-center flex items-center justify-center gap-2 shadow-md font-bold border border-forest-dark hover:bg-white hover:text-forest-dark transition-colors">
-                <i class="fas fa-sun opacity-70 text-highlight"></i> 載入中...
-            </div>
+        <div id="nav-countdown">
+            <i class="fas fa-sun" style="color:#FFA101"></i>
+            <span id="countdown-text">載入中…</span>
         </div>
-
-        <button id="mobile-menu-btn" class="md:hidden text-2xl text-forest-dark focus:outline-none">
-            <i class="fas fa-bars"></i>
-        </button>
     </nav>
 
-    <!-- 主內容區 -->
-    <main class="flex-grow relative bg-cream pb-20">
-        <div class="absolute inset-0 z-0 bg-[url('https://images.unsplash.com/photo-1544161515-4ab6ce6db874?q=80&w=2070&auto=format&fit=crop')] bg-cover bg-center opacity-5 grayscale-[30%]"></div>
-        
-        <div id="view-home" class="relative z-10 w-full max-w-[1400px] mx-auto px-6 md:px-8 py-10 fade-in">
-            
-            <div class="grid grid-cols-1 lg:grid-cols-[2fr_3fr] xl:grid-cols-[1fr_2fr] gap-8 items-start">
-                
-                <!-- 左側：狗狗照片 (無待辦事項) -->
-                <div class="w-full aspect-[4/3] relative overflow-hidden rounded-2xl shadow-soft group bg-sage-main border border-gray-100 flex-shrink-0 lg:sticky top-28">
-                    <div id="slideshow-container" class="absolute inset-0 w-full h-full">
-                        <img src="dog1.png" class="dog-slide absolute inset-0 w-full h-full object-cover transition-opacity duration-1000 opacity-100" alt="Dog 1">
-                        <img src="dog2.png" class="dog-slide absolute inset-0 w-full h-full object-cover transition-opacity duration-1000 opacity-0" alt="Dog 2">
-                        <img src="dog3.png" class="dog-slide absolute inset-0 w-full h-full object-cover transition-opacity duration-1000 opacity-0" alt="Dog 3">
-                        <img src="dog4.png" class="dog-slide absolute inset-0 w-full h-full object-cover transition-opacity duration-1000 opacity-0" alt="Dog 4">
-                        <img src="dog5.png" class="dog-slide absolute inset-0 w-full h-full object-cover transition-opacity duration-1000 opacity-0" alt="Dog 5">
-                        <img src="dog6.png" class="dog-slide absolute inset-0 w-full h-full object-cover transition-opacity duration-1000 opacity-0" alt="Dog 6">
-                    </div>
+    <!-- ══════════════ PAGE BODY ══════════════ -->
+    <div id="page-body" class="fade-in">
 
-                    <div class="absolute inset-0 bg-forest-dark/20 z-10 transition-opacity group-hover:bg-forest-dark/5"></div>
-                    <div class="absolute bottom-6 left-6 text-white text-left z-20 drop-shadow-md">
-                        <h3 class="font-serif text-2xl italic">My Lovely Dogs</h3>
-                        <p class="text-sm opacity-90 font-sans tracking-wide mt-1">Always by my side.</p>
-                    </div>
+        <!-- ── LEFT: Tool Cards ── -->
+        <div id="tools-grid">
+
+            <!-- AI 區 -->
+            <div class="resource-card" data-section="AI 區">
+                <div class="card-header">
+                    <div class="card-icon"><i class="fas fa-robot"></i></div>
+                    <span class="card-title">AI 區</span>
                 </div>
-
-                <!-- 右側：3x2版面 (3列) -->
-                <div class="w-full grid grid-cols-1 md:grid-cols-2 xl:grid-cols-3 gap-5 items-start">
-                    
-                    <!-- AI 區 -->
-                    <div id="view-ai" class="section-container resource-card p-5 bg-white rounded-2xl shadow-sm border border-gray-100 flex flex-col hover:-translate-y-1 transition-transform">
-                        <div class="flex items-center gap-3 mb-4 border-b border-gray-100 pb-3">
-                            <div class="w-8 h-8 rounded-full bg-highlight/10 text-highlight flex items-center justify-center text-sm">
-                                <i class="fas fa-robot"></i>
-                            </div>
-                            <h3 class="font-serif text-lg font-bold text-forest-dark">AI 區</h3>
-                        </div>
-                        
-                        <div class="grid grid-cols-2 gap-3 mb-1">
-                            <a href="https://gemini.google.com/" target="_blank" class="card-link">Gemini</a>
-                            <a href="https://notebooklm.google.com/" target="_blank" class="card-link">Notebook LM</a>
-                            <a href="https://chat.openai.com/" target="_blank" class="card-link">ChatGPT</a>
-                            <a href="https://claude.ai/" target="_blank" class="card-link">Claude</a>
-                        </div>
-
-                        <div id="ai-extra" class="grid grid-cols-2 gap-3 hidden mt-2 pb-1">
-                            <a href="https://www.perplexity.ai/" target="_blank" class="card-link">Perplexity</a>
-                            <a href="https://makersuite.google.com/" target="_blank" class="card-link">AI Studio</a>
-                            <a href="https://stitch.withgoogle.com/" target="_blank" class="card-link">Stitch</a>
-                            <a href="https://app.edcafe.ai/me/home" target="_blank" class="card-link">EDcafe</a>
-                        </div>
-
-                        <button id="ai-btn" onclick="toggleMore('ai')" class="mt-auto pt-4 text-highlight text-sm font-bold w-full text-center hover:opacity-80 transition-opacity flex items-center justify-center gap-1 group">
-                            查看更多 <i class="fas fa-chevron-down group-hover:translate-y-0.5 transition-transform"></i>
-                        </button>
-                    </div>
-
-                    <!-- 放鬆區 -->
-                    <div id="view-relax" class="section-container resource-card p-5 bg-white rounded-2xl shadow-sm border border-gray-100 flex flex-col hover:-translate-y-1 transition-transform">
-                        <div class="flex items-center gap-3 mb-4 border-b border-gray-100 pb-3">
-                            <div class="w-8 h-8 rounded-full bg-highlight/10 text-highlight flex items-center justify-center text-sm">
-                                <i class="fas fa-mug-hot"></i>
-                            </div>
-                            <h3 class="font-serif text-lg font-bold text-forest-dark">放鬆區</h3>
-                        </div>
-                        
-                        <div class="grid grid-cols-2 gap-3 mb-1">
-                            <a href="https://www.facebook.com/" target="_blank" class="card-link">Facebook</a>
-                            <a href="https://www.instagram.com/" target="_blank" class="card-link">Instagram</a>
-                            <a href="https://www.threads.net/" target="_blank" class="card-link">Threads</a>
-                            <a href="https://www.youtube.com/" target="_blank" class="card-link">YouTube</a>
-                        </div>
-
-                        <div id="relax-extra" class="grid grid-cols-2 gap-3 hidden mt-2 pb-1">
-                            <a href="https://94580.net/" target="_blank" class="card-link">94580</a>
-                            <a href="https://shopee.tw/" target="_blank" class="card-link">蝦皮購物</a>
-                            <a href="https://www.momoshop.com.tw/" target="_blank" class="card-link">Momo購物</a>
-                            <a href="https://24h.pchome.com.tw/" target="_blank" class="card-link">PChome 24h</a>
-                        </div>
-
-                        <button id="relax-btn" onclick="toggleMore('relax')" class="mt-auto pt-4 text-highlight text-sm font-bold w-full text-center hover:opacity-80 transition-opacity flex items-center justify-center gap-1 group">
-                            查看更多 <i class="fas fa-chevron-down group-hover:translate-y-0.5 transition-transform"></i>
-                        </button>
-                    </div>
-
-                    <!-- 教學區 -->
-                    <div id="view-teach" class="section-container resource-card p-5 bg-white rounded-2xl shadow-sm border border-gray-100 flex flex-col hover:-translate-y-1 transition-transform">
-                        <div class="flex items-center gap-3 mb-4 border-b border-gray-100 pb-3">
-                            <div class="w-8 h-8 rounded-full bg-highlight/10 text-highlight flex items-center justify-center text-sm">
-                                <i class="fas fa-chalkboard-teacher"></i>
-                            </div>
-                            <h3 class="font-serif text-lg font-bold text-forest-dark">教學區</h3>
-                        </div>
-                        
-                        <div class="grid grid-cols-2 gap-3 mb-1">
-                            <a href="https://edisc3.hle.com.tw/" target="_blank" class="card-link">翰林電子書</a>
-                            <a href="https://nanibox3.oneclass.com.tw/" target="_blank" class="card-link">南一資源</a>
-                            <a href="https://digitalmaster.knsh.com.tw/" target="_blank" class="card-link">康軒電子書</a>
-                            <a href="https://hanlindigi.hle.com.tw/" target="_blank" class="card-link">翰林平台</a>
-                        </div>
-
-                        <div id="teach-extra" class="grid grid-cols-2 gap-3 hidden mt-2 pb-1">
-                            <a href="https://mgz.hle.com.tw/" target="_blank" class="card-link">期刊大師</a>
-                            <a href="https://emath.math.ncu.edu.tw/" target="_blank" class="card-link">子由數學</a>
-                            <a href="https://subjects.modernedu.hk/" target="_blank" class="card-link">數學 App</a>
-                            <a href="https://polypad.amplify.com/" target="_blank" class="card-link">Mathigon</a>
-                            <a href="https://www.geogebra.org/" target="_blank" class="card-link">繪圖計算機</a>
-                            <a href="https://aaclearningbackend.azurewebsites.net/" target="_blank" class="card-link">AAC</a>
-                            <a href="https://www.learnmode.net/" target="_blank" class="card-link">學習吧</a>
-                            <a href="https://teach.classdojo.com/" target="_blank" class="card-link">ClassDojo</a>
-                            <a href="https://sites.google.com/view/specialchu/home" target="_blank" class="card-link">線上學習區</a>
-                            <a href="https://toytheater.com/" target="_blank" class="card-link">Toy Theater</a>
-                            <a href="https://nanipaper.oneclass.com.tw/" target="_blank" class="card-link">南一出題</a>
-                            <a href="https://quiz.knsh.com.tw/" target="_blank" class="card-link">康軒出題</a>
-                            <a href="https://testbank.hle.com.tw/" target="_blank" class="card-link">翰林出題</a>
-                        </div>
-
-                        <button id="teach-btn" onclick="toggleMore('teach')" class="mt-auto pt-4 text-highlight text-sm font-bold w-full text-center hover:opacity-80 transition-opacity flex items-center justify-center gap-1 group">
-                            查看更多 <i class="fas fa-chevron-down group-hover:translate-y-0.5 transition-transform"></i>
-                        </button>
-                    </div>
-
-                    <!-- 行政區 -->
-                    <div id="view-admin" class="section-container resource-card p-5 bg-white rounded-2xl shadow-sm border border-gray-100 flex flex-col hover:-translate-y-1 transition-transform">
-                        <div class="flex items-center gap-3 mb-4 border-b border-gray-100 pb-3">
-                            <div class="w-8 h-8 rounded-full bg-highlight/10 text-highlight flex items-center justify-center text-sm">
-                                <i class="fas fa-folder-open"></i>
-                            </div>
-                            <h3 class="font-serif text-lg font-bold text-forest-dark">行政區</h3>
-                        </div>
-                        
-                        <div class="grid grid-cols-2 gap-3 mb-1">
-                            <a href="https://www.set.edu.tw/" target="_blank" class="card-link">特通網</a>
-                            <a href="https://eschool.hlc.edu.tw/" target="_blank" class="card-link">全誼校務系統</a>
-                            <a href="https://news.hlc.edu.tw/" target="_blank" class="card-link">花蓮處務公告</a>
-                            <a href="https://srec.hlc.edu.tw/" target="_blank" class="card-link">特教資源網</a>
-                        </div>
-
-                        <div id="admin-extra" class="grid grid-cols-2 gap-3 hidden mt-2 pb-1">
-                            <a href="https://special.moe.gov.tw/" target="_blank" class="card-link">特教研習</a>
-                            <a href="https://www1.inservice.edu.tw/" target="_blank" class="card-link">全國研習</a>
-                            <a href="https://drive.google.com/drive/folders/15F9f5dW6PHYode_w1opdEKLYkoNKmnMe" target="_blank" class="card-link">鑑定表單</a>
-                            <a href="https://www.irasutoya.com/" target="_blank" class="card-link">Irasutoya</a>
-                            <a href="https://www.flaticon.com/" target="_blank" class="card-link">Flaticon</a>
-                            <a href="https://chojugiga.com/" target="_blank" class="card-link">鳥獸戲畫</a>
-                        </div>
-
-                        <button id="admin-btn" onclick="toggleMore('admin')" class="mt-auto pt-4 text-highlight text-sm font-bold w-full text-center hover:opacity-80 transition-opacity flex items-center justify-center gap-1 group">
-                            查看更多 <i class="fas fa-chevron-down group-hover:translate-y-0.5 transition-transform"></i>
-                        </button>
-                    </div>
-
-                    <!-- 工具區 -->
-                    <div id="view-tools" class="section-container resource-card p-5 bg-white rounded-2xl shadow-sm border border-gray-100 flex flex-col hover:-translate-y-1 transition-transform">
-                        <div class="flex items-center gap-3 mb-4 border-b border-gray-100 pb-3">
-                            <div class="w-8 h-8 rounded-full bg-highlight/10 text-highlight flex items-center justify-center text-sm">
-                                <i class="fas fa-wrench"></i>
-                            </div>
-                            <h3 class="font-serif text-lg font-bold text-forest-dark">工具區</h3>
-                        </div>
-                        
-                        <div class="grid grid-cols-2 gap-3 mb-1">
-                            <a href="https://drive.google.com/" target="_blank" class="card-link">Google 雲端</a>
-                            <a href="https://www.notion.so/" target="_blank" class="card-link">Notion</a>
-                            <a href="https://keep.google.com/" target="_blank" class="card-link">Keep</a>
-                            <a href="https://calendar.google.com/" target="_blank" class="card-link">Google 日曆</a>
-                        </div>
-
-                        <div id="tools-extra" class="grid grid-cols-2 gap-3 hidden mt-2 pb-1">
-                            <a href="https://mail.google.com/" target="_blank" class="card-link">Gmail</a>
-                            <a href="https://translate.google.com/" target="_blank" class="card-link">Google 翻譯</a>
-                            <a href="https://github.com/chuoneone?tab=repositories" target="_blank" class="card-link">GitHub</a>
-                            <a href="https://docs.google.com/" target="_blank" class="card-link">Google 文件</a>
-                            <a href="https://slides.google.com/" target="_blank" class="card-link">Google 簡報</a>
-                            <a href="https://sheets.google.com/" target="_blank" class="card-link">Google 試算表</a>
-                            <a href="https://forms.google.com/" target="_blank" class="card-link">Google 表單</a>
-                            <a href="https://login.microsoftonline.com/" target="_blank" class="card-link">Office 365</a>
-                            <a href="https://www.canva.com/zh_tw/" target="_blank" class="card-link">Canva</a>
-                            <a href="https://classroom.google.com/" target="_blank" class="card-link">Classroom</a>
-                            <a href="https://soundoftext.com/" target="_blank" class="card-link">文字轉語音</a>
-                            <a href="https://naozhong.tw/設置計時器-5-分鐘/" target="_blank" class="card-link">線上計時器</a>
-                            <a href="https://wordwall.net/" target="_blank" class="card-link">Wordwall</a>
-                            <a href="https://quizizz.com/" target="_blank" class="card-link">Quizizz</a>
-                            <a href="https://dashboard.blooket.com/" target="_blank" class="card-link">Blooket</a>
-                            <a href="https://www.gimkit.com/" target="_blank" class="card-link">Gimkit</a>
-                            <a href="https://create.kahoot.it/" target="_blank" class="card-link">Kahoot</a>
-                        </div>
-
-                        <button id="tools-btn" onclick="toggleMore('tools')" class="mt-auto pt-4 text-highlight text-sm font-bold w-full text-center hover:opacity-80 transition-opacity flex items-center justify-center gap-1 group">
-                            查看更多 <i class="fas fa-chevron-down group-hover:translate-y-0.5 transition-transform"></i>
-                        </button>
-                    </div>
-
+                <div class="links-grid">
+                    <a href="https://gemini.google.com/" target="_blank" class="card-link" data-name="Gemini">Gemini</a>
+                    <a href="https://notebooklm.google.com/" target="_blank" class="card-link" data-name="Notebook LM">Notebook LM</a>
+                    <a href="https://chat.openai.com/" target="_blank" class="card-link" data-name="ChatGPT">ChatGPT</a>
+                    <a href="https://claude.ai/" target="_blank" class="card-link" data-name="Claude">Claude</a>
+                    <a href="https://www.perplexity.ai/" target="_blank" class="card-link" data-name="Perplexity">Perplexity</a>
+                    <a href="https://makersuite.google.com/" target="_blank" class="card-link" data-name="AI Studio">AI Studio</a>
+                    <a href="https://stitch.withgoogle.com/" target="_blank" class="card-link" data-name="Stitch">Stitch</a>
+                    <a href="https://app.edcafe.ai/me/home" target="_blank" class="card-link" data-name="EDcafe">EDcafe</a>
                 </div>
             </div>
-        </div>
-    </main>
 
-    <footer class="bg-sage-main py-8 mt-auto border-t border-white/50">
-        <div class="max-w-7xl mx-auto px-6 text-center">
-            <div class="mb-4">
-                 <i class="fas fa-shapes text-2xl text-forest-dark opacity-50"></i>
+            <!-- 書商資源區 -->
+            <div class="resource-card" data-section="書商資源區">
+                <div class="card-header">
+                    <div class="card-icon"><i class="fas fa-book-open"></i></div>
+                    <span class="card-title">書商資源區</span>
+                </div>
+                <div class="links-grid">
+                    <a href="https://edisc3.hle.com.tw/" target="_blank" class="card-link" data-name="翰林電子書">翰林電子書</a>
+                    <a href="https://hanlindigi.hle.com.tw/" target="_blank" class="card-link" data-name="翰林平台">翰林平台</a>
+                    <a href="https://mgz.hle.com.tw/" target="_blank" class="card-link" data-name="期刊大師">期刊大師</a>
+                    <a href="https://testbank.hle.com.tw/" target="_blank" class="card-link" data-name="翰林出題">翰林出題</a>
+                    <a href="https://nanibox3.oneclass.com.tw/" target="_blank" class="card-link" data-name="南一資源">南一資源</a>
+                    <a href="https://nanipaper.oneclass.com.tw/" target="_blank" class="card-link" data-name="南一出題">南一出題</a>
+                    <a href="https://digitalmaster.knsh.com.tw/" target="_blank" class="card-link" data-name="康軒電子書">康軒電子書</a>
+                    <a href="https://quiz.knsh.com.tw/" target="_blank" class="card-link" data-name="康軒出題">康軒出題</a>
+                </div>
             </div>
-            <p class="text-forest-dark font-bold text-sm tracking-wide">
-                &copy; 2026 Chuone Toolbox. All rights reserved.
-            </p>
-            <p class="text-forest-dark/70 text-xs mt-2 font-serif italic">
-                Designed with serenity in mind.
-            </p>
+
+            <!-- 放鬆區 -->
+            <div class="resource-card" data-section="放鬆區">
+                <div class="card-header">
+                    <div class="card-icon"><i class="fas fa-mug-hot"></i></div>
+                    <span class="card-title">放鬆區</span>
+                </div>
+                <div class="icon-links-grid">
+                    <a href="https://www.facebook.com/" target="_blank" class="icon-link" data-name="Facebook" data-tooltip="Facebook"><i class="fab fa-facebook-f"></i></a>
+                    <a href="https://www.instagram.com/" target="_blank" class="icon-link" data-name="Instagram" data-tooltip="Instagram"><i class="fab fa-instagram"></i></a>
+                    <a href="https://www.threads.net/" target="_blank" class="icon-link" data-name="Threads" data-tooltip="Threads"><i class="fab fa-threads"></i></a>
+                    <a href="https://www.youtube.com/" target="_blank" class="icon-link" data-name="YouTube" data-tooltip="YouTube"><i class="fab fa-youtube"></i></a>
+                    <a href="https://94580.net/" target="_blank" class="icon-link" data-name="94580" data-tooltip="94580"><i class="fas fa-gamepad"></i></a>
+                    <a href="https://shopee.tw/" target="_blank" class="icon-link" data-name="蝦皮購物" data-tooltip="蝦皮購物"><i class="fas fa-bag-shopping"></i></a>
+                    <a href="https://www.momoshop.com.tw/" target="_blank" class="icon-link" data-name="Momo購物" data-tooltip="Momo購物"><i class="fas fa-cart-shopping"></i></a>
+                    <a href="https://24h.pchome.com.tw/" target="_blank" class="icon-link" data-name="PChome 24h" data-tooltip="PChome 24h"><i class="fas fa-truck-fast"></i></a>
+                </div>
+            </div>
+
+            <!-- 行政區 -->
+            <div class="resource-card" data-section="行政區">
+                <div class="card-header">
+                    <div class="card-icon"><i class="fas fa-folder-open"></i></div>
+                    <span class="card-title">行政區</span>
+                </div>
+                <div class="links-grid">
+                    <a href="https://www.set.edu.tw/" target="_blank" class="card-link" data-name="特通網">特通網</a>
+                    <a href="https://eschool.hlc.edu.tw/" target="_blank" class="card-link" data-name="全誼校務系統">全誼校務系統</a>
+                    <a href="https://news.hlc.edu.tw/" target="_blank" class="card-link" data-name="花蓮處務公告">花蓮處務公告</a>
+                    <a href="https://srec.hlc.edu.tw/" target="_blank" class="card-link" data-name="特教資源網">特教資源網</a>
+                    <a href="https://special.moe.gov.tw/" target="_blank" class="card-link" data-name="特教研習">特教研習</a>
+                    <a href="https://www1.inservice.edu.tw/" target="_blank" class="card-link" data-name="全國研習">全國研習</a>
+                    <a href="https://drive.google.com/drive/folders/15F9f5dW6PHYode_w1opdEKLYkoNKmnMe" target="_blank" class="card-link" data-name="鑑定表單">鑑定表單</a>
+                    <a href="https://www.irasutoya.com/" target="_blank" class="card-link" data-name="Irasutoya">Irasutoya</a>
+                    <a href="https://www.flaticon.com/" target="_blank" class="card-link" data-name="Flaticon">Flaticon</a>
+                    <a href="https://chojugiga.com/" target="_blank" class="card-link" data-name="鳥獸戲畫">鳥獸戲畫</a>
+                </div>
+            </div>
+
+            <!-- 互動教學工具 -->
+            <div class="resource-card" data-section="互動教學工具">
+                <div class="card-header">
+                    <div class="card-icon"><i class="fas fa-gamepad"></i></div>
+                    <span class="card-title">互動教學工具</span>
+                </div>
+                <div class="links-grid">
+                    <a href="https://classroom.google.com/" target="_blank" class="card-link" data-name="Classroom">Classroom</a>
+                    <a href="https://www.learnmode.net/" target="_blank" class="card-link" data-name="學習吧">學習吧</a>
+                    <a href="https://teach.classdojo.com/" target="_blank" class="card-link" data-name="ClassDojo">ClassDojo</a>
+                    <a href="https://sites.google.com/view/specialchu/home" target="_blank" class="card-link" data-name="線上學習區">線上學習區</a>
+                    <a href="https://wordwall.net/" target="_blank" class="card-link" data-name="Wordwall">Wordwall</a>
+                    <a href="https://quizizz.com/" target="_blank" class="card-link" data-name="Quizizz">Quizizz</a>
+                    <a href="https://dashboard.blooket.com/" target="_blank" class="card-link" data-name="Blooket">Blooket</a>
+                    <a href="https://www.gimkit.com/" target="_blank" class="card-link" data-name="Gimkit">Gimkit</a>
+                    <a href="https://create.kahoot.it/" target="_blank" class="card-link" data-name="Kahoot">Kahoot</a>
+                    <a href="https://toytheater.com/" target="_blank" class="card-link" data-name="Toy Theater">Toy Theater</a>
+                    <a href="https://emath.math.ncu.edu.tw/" target="_blank" class="card-link" data-name="子由數學">子由數學</a>
+                    <a href="https://subjects.modernedu.hk/" target="_blank" class="card-link" data-name="數學 App">數學 App</a>
+                    <a href="https://polypad.amplify.com/" target="_blank" class="card-link" data-name="Mathigon">Mathigon</a>
+                    <a href="https://www.geogebra.org/" target="_blank" class="card-link" data-name="繪圖計算機">繪圖計算機</a>
+                    <a href="https://aaclearningbackend.azurewebsites.net/" target="_blank" class="card-link" data-name="AAC">AAC</a>
+                    <a href="https://soundoftext.com/" target="_blank" class="card-link" data-name="文字轉語音">文字轉語音</a>
+                    <a href="https://naozhong.tw/設置計時器-5-分鐘/" target="_blank" class="card-link" data-name="線上計時器">線上計時器</a>
+                </div>
+            </div>
+
+            <!-- 工具區 -->
+            <div class="resource-card" data-section="工具區">
+                <div class="card-header">
+                    <div class="card-icon"><i class="fas fa-wrench"></i></div>
+                    <span class="card-title">工具區</span>
+                </div>
+                <div class="icon-links-grid">
+                    <a href="https://drive.google.com/" target="_blank" class="icon-link" data-name="Google 雲端" data-tooltip="Google 雲端"><i class="fas fa-cloud"></i></a>
+                    <a href="https://docs.google.com/" target="_blank" class="icon-link" data-name="Google 文件" data-tooltip="Google 文件"><i class="fas fa-file-lines"></i></a>
+                    <a href="https://slides.google.com/" target="_blank" class="icon-link" data-name="Google 簡報" data-tooltip="Google 簡報"><i class="fas fa-display"></i></a>
+                    <a href="https://sheets.google.com/" target="_blank" class="icon-link" data-name="Google 試算表" data-tooltip="Google 試算表"><i class="fas fa-table"></i></a>
+                    <a href="https://forms.google.com/" target="_blank" class="icon-link" data-name="Google 表單" data-tooltip="Google 表單"><i class="fas fa-rectangle-list"></i></a>
+                    <a href="https://mail.google.com/" target="_blank" class="icon-link" data-name="Gmail" data-tooltip="Gmail"><i class="fas fa-envelope"></i></a>
+                    <a href="https://calendar.google.com/" target="_blank" class="icon-link" data-name="Google 日曆" data-tooltip="Google 日曆"><i class="fas fa-calendar-days"></i></a>
+                    <a href="https://keep.google.com/" target="_blank" class="icon-link" data-name="Keep" data-tooltip="Keep"><i class="fas fa-lightbulb"></i></a>
+                    <a href="https://translate.google.com/" target="_blank" class="icon-link" data-name="Google 翻譯" data-tooltip="Google 翻譯"><i class="fas fa-language"></i></a>
+                    <a href="https://login.microsoftonline.com/" target="_blank" class="icon-link" data-name="Office 365" data-tooltip="Office 365"><i class="fab fa-microsoft"></i></a>
+                    <a href="https://www.canva.com/zh_tw/" target="_blank" class="icon-link" data-name="Canva" data-tooltip="Canva"><i class="fas fa-palette"></i></a>
+                    <a href="https://www.notion.so/" target="_blank" class="icon-link" data-name="Notion" data-tooltip="Notion"><i class="fas fa-book-open"></i></a>
+                    <a href="https://github.com/chuoneone?tab=repositories" target="_blank" class="icon-link" data-name="GitHub" data-tooltip="GitHub"><i class="fab fa-github"></i></a>
+                </div>
+            </div>
+
+            <!-- Empty search state -->
+            <div id="search-empty">
+                <i class="fas fa-search-minus"></i>
+                <p>找不到符合的工具，試試其他關鍵字</p>
+            </div>
         </div>
+
+        <!-- ── RIGHT: Sidebar ── -->
+        <div id="sidebar">
+
+            <!-- Dog slideshow -->
+            <div id="dog-panel">
+                <img src="dog1.png" class="dog-slide opacity-100" alt="愛犬 1" />
+                <img src="dog2.png" class="dog-slide opacity-0"   alt="愛犬 2" />
+                <img src="dog3.png" class="dog-slide opacity-0"   alt="愛犬 3" />
+                <img src="dog4.png" class="dog-slide opacity-0"   alt="愛犬 4" />
+                <img src="dog5.png" class="dog-slide opacity-0"   alt="愛犬 5" />
+                <img src="dog6.png" class="dog-slide opacity-0"   alt="愛犬 6" />
+                <div class="dog-gradient"></div>
+                <div class="dog-caption">
+                    <h3>My Lovely Dogs</h3>
+                    <p>Always by my side.</p>
+                </div>
+            </div>
+
+            <!-- Google Keep -->
+            <div id="keep-panel">
+                <div class="keep-header">
+                    <i class="fas fa-lightbulb"></i>
+                    <span>Google Keep 待辦</span>
+                    <a href="https://keep.google.com/" target="_blank" title="在新視窗開啟">
+                        <i class="fas fa-external-link-alt"></i> 開啟
+                    </a>
+                </div>
+                <iframe
+                    id="keep-frame"
+                    src="https://keep.google.com/"
+                    title="Google Keep"
+                    allow="same-origin"
+                    sandbox="allow-same-origin allow-scripts allow-forms allow-popups"
+                ></iframe>
+                <div id="keep-fallback">
+                    <p>Google Keep 限制了頁面內嵌顯示。<br>請點下方按鈕直接開啟。</p>
+                    <a href="https://keep.google.com/" target="_blank">
+                        <i class="fas fa-lightbulb"></i> 開啟 Google Keep
+                    </a>
+                </div>
+            </div>
+
+        </div>
+    </div><!-- /page-body -->
+
+    <!-- ══════════════ FOOTER ══════════════ -->
+    <footer>
+        © 2026 Chuone Toolbox &nbsp;·&nbsp; <span>Designed with serenity in mind.</span>
     </footer>
 
     <script>
-        document.addEventListener('DOMContentLoaded', () => {
-            
-            // --- 狗狗圖片輪播功能 ---
-            function startDogSlideshow() {
-                const slides = document.querySelectorAll('.dog-slide');
-                if (slides.length === 0) return;
-                let currentSlide = 0;
-                const totalSlides = slides.length;
-                const slideInterval = 4000;
+    document.addEventListener('DOMContentLoaded', () => {
 
-                setInterval(() => {
-                    slides[currentSlide].classList.remove('opacity-100');
-                    slides[currentSlide].classList.add('opacity-0');
+        /* ─── Dog Slideshow ─── */
+        (function () {
+            const slides = document.querySelectorAll('#dog-panel .dog-slide');
+            if (!slides.length) return;
+            let cur = 0;
+            setInterval(() => {
+                slides[cur].classList.remove('opacity-100');
+                slides[cur].classList.add('opacity-0');
+                cur = (cur + 1) % slides.length;
+                slides[cur].classList.remove('opacity-0');
+                slides[cur].classList.add('opacity-100');
+            }, 4000);
+        })();
 
-                    currentSlide = (currentSlide + 1) % totalSlides;
-
-                    slides[currentSlide].classList.remove('opacity-0');
-                    slides[currentSlide].classList.add('opacity-100');
-                }, slideInterval);
+        /* ─── Countdown ─── */
+        (function () {
+            const el = document.getElementById('countdown-text');
+            function tick() {
+                const target = new Date('2026-07-01');
+                const diff   = Math.ceil((target - new Date()) / 86400000);
+                if      (diff > 0) el.textContent = `暑假倒數 ${diff} 天`;
+                else if (diff === 0) el.textContent = '暑假就是今天！🎉';
+                else                 el.textContent = '假期愉快！';
             }
-            startDogSlideshow();
+            tick();
+            setInterval(tick, 60000);
+        })();
 
-            // --- 展開查看更多功能 ---
-            window.toggleMore = function(id) {
-                const container = document.getElementById(id + '-extra');
-                const btn = document.getElementById(id + '-btn');
-                if (container.classList.contains('hidden')) {
-                    container.classList.remove('hidden');
-                    btn.innerHTML = '收起 <i class="fas fa-chevron-up group-hover:-translate-y-0.5 transition-transform"></i>';
-                } else {
-                    container.classList.add('hidden');
-                    btn.innerHTML = '查看更多 <i class="fas fa-chevron-down group-hover:translate-y-0.5 transition-transform"></i>';
+        /* ─── Google Keep iframe fallback ─── */
+        (function () {
+            const frame    = document.getElementById('keep-frame');
+            const fallback = document.getElementById('keep-fallback');
+            // Detect blocked iframe: if contentDocument is null after load → blocked
+            frame.addEventListener('load', () => {
+                try {
+                    // Cross-origin success means it loaded (unlikely for Keep)
+                    const doc = frame.contentDocument || frame.contentWindow.document;
+                    if (doc && doc.body && doc.body.innerHTML === '') {
+                        throw new Error('empty');
+                    }
+                } catch (e) {
+                    // Blocked by X-Frame-Options → show fallback
+                    frame.style.display = 'none';
+                    fallback.style.display = 'block';
                 }
-            };
-
-            // --- 倒數計時功能 ---
-            function updateCountdown() {
-                const countdownElement = document.getElementById('nav-countdown'); 
-                if (!countdownElement) return;
-                
-                // 設定暑假日期
-                const targetDate = new Date('2026-07-01');
-                const today = new Date();
-                const diffTime = targetDate - today;
-                const diffDays = Math.ceil(diffTime / (1000 * 60 * 60 * 24));
-
-                let countdownText = '';
-                if (diffDays > 0) {
-                    countdownText = `暑假倒數 ${diffDays} 天`;
-                } else if (diffDays === 0) {
-                    countdownText = `暑假就是今天！🎉`;
-                } else {
-                    countdownText = `假期愉快！`;
+            });
+            // Extra safety: if load never fires in 6 s, assume blocked
+            setTimeout(() => {
+                if (fallback.style.display === 'block') return;
+                try {
+                    const doc = frame.contentDocument || frame.contentWindow.document;
+                    if (!doc || !doc.body || doc.body.innerHTML === '') {
+                        frame.style.display = 'none';
+                        fallback.style.display = 'block';
+                    }
+                } catch (e) {
+                    frame.style.display = 'none';
+                    fallback.style.display = 'block';
                 }
-                countdownElement.innerHTML = `<i class="fas fa-sun text-highlight"></i> ${countdownText}`;
+            }, 6000);
+        })();
+
+        /* ─── Search ─── */
+        (function () {
+            const input   = document.getElementById('search-input');
+            const clear   = document.getElementById('search-clear');
+            const cards   = document.querySelectorAll('.resource-card');
+            const empty   = document.getElementById('search-empty');
+
+            function runSearch() {
+                const q = input.value.trim().toLowerCase();
+                clear.style.display = q ? 'block' : 'none';
+                let anyCard = false;
+
+                cards.forEach(card => {
+                    if (card.id === 'search-empty') return;
+                    const links = card.querySelectorAll('.card-link');
+                    let anyLink = false;
+
+                    links.forEach(link => {
+                        const name = link.getAttribute('data-name') || '';
+                        const isIconLink = link.classList.contains('icon-link');
+                        if (!q || name.toLowerCase().includes(q)) {
+                            link.classList.remove('search-hidden');
+                            if (!isIconLink) {
+                                if (q) {
+                                    const i  = name.toLowerCase().indexOf(q);
+                                    link.innerHTML =
+                                        name.slice(0, i) +
+                                        '<mark>' + name.slice(i, i + q.length) + '</mark>' +
+                                        name.slice(i + q.length);
+                                } else {
+                                    link.textContent = name;
+                                }
+                            }
+                            anyLink = true;
+                        } else {
+                            link.classList.add('search-hidden');
+                            if (!isIconLink) link.textContent = name;
+                        }
+                    });
+
+                    if (anyLink) { card.classList.remove('search-hidden'); anyCard = true; }
+                    else           card.classList.add('search-hidden');
+                });
+
+                empty.style.display = (q && !anyCard) ? 'block' : 'none';
             }
-            updateCountdown();
-            setInterval(updateCountdown, 60000);
 
-        });
+            input.addEventListener('input', runSearch);
 
-        // --- 視圖切換邏輯 ---
-        function switchView(viewId) {
-            const target = document.getElementById('view-' + viewId);
-            if(target) {
-                if (viewId === 'home') {
-                    window.scrollTo({ top: 0, behavior: 'smooth' });
-                } else {
-                    target.scrollIntoView({ behavior: 'smooth', block: 'start' });
+            // Enter → open first visible link
+            input.addEventListener('keydown', e => {
+                if (e.key === 'Enter') {
+                    const first = document.querySelector('.card-link:not(.search-hidden)');
+                    if (first) first.click();
                 }
-            }
+            });
 
-            const mobileMenu = document.getElementById('mobile-menu');
-            if(mobileMenu && !mobileMenu.classList.contains('hidden')) {
-                toggleMobileMenu();
-            }
-        }
+            // Clear button
+            clear.addEventListener('click', () => {
+                input.value = '';
+                input.focus();
+                runSearch();
+            });
+        })();
 
-        // --- 手機版選單控制 ---
-        const mobileBtn = document.getElementById('mobile-menu-btn');
-        const nav = document.querySelector('nav');
-        let mobileMenuDiv = document.getElementById('mobile-menu');
-
-        if (!mobileMenuDiv) {
-            mobileMenuDiv = document.createElement('div');
-            mobileMenuDiv.id = 'mobile-menu';
-            mobileMenuDiv.className = 'md:hidden absolute top-full left-0 w-full bg-sage-main shadow-xl border-t border-forest-dark/10 hidden flex-col p-6 gap-4 z-40';
-            mobileMenuDiv.innerHTML = `
-                <div onclick="switchView('ai')" class="block py-3 font-medium text-forest-dark cursor-pointer border-b border-forest-dark/10 hover:text-highlight">AI 區</div>
-                <div onclick="switchView('relax')" class="block py-3 font-medium text-forest-dark cursor-pointer border-b border-forest-dark/10 hover:text-highlight">放鬆區</div>
-                <div onclick="switchView('tools')" class="block py-3 font-medium text-forest-dark cursor-pointer border-b border-forest-dark/10 hover:text-highlight">工具區</div>
-                <div onclick="switchView('teach')" class="block py-3 font-medium text-forest-dark cursor-pointer border-b border-forest-dark/10 hover:text-highlight">教學區</div>
-                <div onclick="switchView('admin')" class="block py-3 font-medium text-forest-dark cursor-pointer hover:text-highlight">行政區</div>
-            `;
-            nav.appendChild(mobileMenuDiv);
-        }
-
-        function toggleMobileMenu() {
-            mobileMenuDiv.classList.toggle('hidden');
-            mobileMenuDiv.classList.toggle('flex');
-            const icon = mobileBtn.querySelector('i');
-            if (mobileMenuDiv.classList.contains('hidden')) {
-                icon.classList.remove('fa-times');
-                icon.classList.add('fa-bars');
-            } else {
-                icon.classList.remove('fa-bars');
-                icon.classList.add('fa-times');
-            }
-        }
-
-        mobileBtn.addEventListener('click', toggleMobileMenu);
+    });
     </script>
 </body>
 </html>
